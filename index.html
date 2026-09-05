@@ -9,76 +9,61 @@
     <style>
 
         /* ページ全体 */
-        body {
-            margin: 0;
-            background-color: #2b1a14;
-        }
+        <body>
 
-        /* TOP画像を置く場所 */
-        .hero-door {
-            position: relative;
-            width: 70%;
-            aspect-ratio: 3 / 2;
-            margin: 0 auto;
-            overflow: hidden;
-            cursor: pointer;
-        }
+    <!-- TOP画像 -->
+    <div class="hero-door" id="heroDoor">
 
-        /* 左右の扉 */
-        .door {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
+        <div class="door door-left"></div>
 
-            background-image: url("hero.png");
-            background-size: 200% 100%;
-            background-repeat: no-repeat;
+        <div class="door door-right"></div>
 
-            transition: transform 1s ease;
-        }
-
-        /* 左側 */
-        .door-left {
-            left: 0;
-            background-position: left center;
-        }
-
-        /* 右側 */
-        .door-right {
-            right: 0;
-            background-position: right center;
-        }
-
-        /* クリックされた後 */
-        .hero-door.open .door-left {
-            transform: translateX(-100%);
-        }
-
-        .hero-door.open .door-right {
-            transform: translateX(100%);
-        }
+    </div>
 
 
-        /* スマホ */
-        @media (max-width: 768px) {
+    <!-- CATEGORY画面 -->
+    <div class="category-screen" id="categoryScreen">
 
-            .hero-door {
-                width: 100%;
-                aspect-ratio: 832 / 1792;
-            }
+        <picture>
 
-            .door {
-                background-image: url("shero.png");
-            }
+            <!-- スマホでは縦長画像 -->
+            <source
+                media="(max-width: 768px)"
+                srcset="scategory.png">
 
-        }
+            <!-- PCでは横長画像 -->
+            <img
+                src="category.png"
+                alt="Chocolate Craft Campus カテゴリー">
 
-    </style>
-</head>
+        </picture>
+
+    </div>
 
 
-<body>
+    <script>
+
+        const heroDoor = document.getElementById("heroDoor");
+        const categoryScreen = document.getElementById("categoryScreen");
+
+        heroDoor.addEventListener("click", function() {
+
+            // TOP画像を左右に開く
+            heroDoor.classList.add("open");
+
+            // 1秒後にCATEGORY画面を表示
+            setTimeout(function() {
+
+                categoryScreen.classList.add("show");
+
+            }, 1000);
+
+        });
+
+    </script>
+
+</body>
+
 
     <!-- TOP画像 -->
     <div class="hero-door" id="heroDoor">
