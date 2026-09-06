@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,42 +11,76 @@
         /* ページ全体 */
         body {
             margin: 0;
-            background-color: #1c120e;
+            background-color: #2b1a14;
+        }
+
+        /* TOP画像を置く場所 */
+        .hero-door {
+            position: relative;
+            width: 70%;
+            aspect-ratio: 3 / 2;
+            margin: 0 auto;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* 左右の扉 */
+        .door {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+
+            background-image: url("hero.png");
+            background-size: 200% 100%;
+            background-repeat: no-repeat;
+
+            transition: transform 1s ease;
+        }
+
+        /* 左側 */
+        .door-left {
+            left: 0;
+            background-position: left center;
+        }
+
+        /* 右側 */
+        .door-right {
+            right: 0;
+            background-position: right center;
+        }
+
+        /* クリックされた後 */
+        .hero-door.open .door-left {
+            transform: translateX(-100%);
+        }
+
+        .hero-door.open .door-right {
+            transform: translateX(100%);
         }
 
 
-        /* CATEGORY画面 */
-        .category-screen {
-            display: none;
-            width: 100%;
-            background-color: #1c120e;
+        /* スマホ */
+        @media (max-width: 768px) {
+
+            .hero-door {
+                width: 100%;
+                aspect-ratio: 832 / 1792;
+            }
+
+            .door {
+                background-image: url("shero.png");
+            }
+
         }
-
-
-        /* CATEGORY画像 */
-        .category-screen img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-
-        /* CATEGORY表示 */
-        .category-screen.show {
-            display: block;
-        }
-
 
     </style>
-
 </head>
 
 
 <body>
 
-
     <!-- TOP画像 -->
-
     <div class="hero-door" id="heroDoor">
 
         <div class="door door-left"></div>
@@ -58,59 +90,17 @@
     </div>
 
 
-    <!-- CATEGORY画面 -->
-
-    <div class="category-screen" id="categoryScreen">
-
-        <picture>
-
-            <!-- スマホでは縦長画像 -->
-
-            <source
-                media="(max-width: 768px)"
-                srcset="scategory.png">
-
-
-            <!-- PCでは横長画像 -->
-
-            <img
-                src="category.png"
-                alt="Chocolate Craft Campus カテゴリー">
-
-        </picture>
-
-    </div>
-
-
     <script>
 
         const heroDoor = document.getElementById("heroDoor");
 
-        const categoryScreen = document.getElementById("categoryScreen");
-
-
         heroDoor.addEventListener("click", function() {
 
-
-            // TOP画像を左右に開く
-
             heroDoor.classList.add("open");
-
-
-            // 1秒後にCATEGORY画面を表示
-
-            setTimeout(function() {
-
-                categoryScreen.classList.add("show");
-
-            }, 1000);
-
 
         });
 
     </script>
 
-
 </body>
-
 </html>
