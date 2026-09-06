@@ -73,11 +73,11 @@
         ========================= */
 
         .hero-door.open .door-left {
-            transform: translateX(-100%);
+            transform: translateX(-110%);
         }
 
         .hero-door.open .door-right {
-            transform: translateX(100%);
+            transform: translateX(110%);
         }
 
 
@@ -95,6 +95,9 @@
             .door {
                 background-image: url("shero.png");
             }
+            .category-screen {
+                width: 100%;
+    }
 
         }
 
@@ -106,16 +109,15 @@
          .category-screen {
             position: absolute;
             top: 0;
-            left: 0;
-
-            width: 100%;
+            left: 50%;
+            width: 70%;
 
             background-color: #1c120e;
 
             opacity: 1;
             visibility: visible;
-
             z-index: 1;
+            transform: translateX(-50%);
         }
 
 
@@ -215,4 +217,3 @@
 </body>
 
 </html>
-
