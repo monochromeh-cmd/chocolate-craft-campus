@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,9 +11,44 @@
     <style>
 
         /* ページ全体 */
-        <body>
+        body {
+            margin: 0;
+            background-color: #1c120e;
+        }
+
+
+        /* CATEGORY画面 */
+        .category-screen {
+            display: none;
+            width: 100%;
+            background-color: #1c120e;
+        }
+
+
+        /* CATEGORY画像 */
+        .category-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+
+        /* CATEGORY表示 */
+        .category-screen.show {
+            display: block;
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
 
     <!-- TOP画像 -->
+
     <div class="hero-door" id="heroDoor">
 
         <div class="door door-left"></div>
@@ -22,16 +59,20 @@
 
 
     <!-- CATEGORY画面 -->
+
     <div class="category-screen" id="categoryScreen">
 
         <picture>
 
             <!-- スマホでは縦長画像 -->
+
             <source
                 media="(max-width: 768px)"
                 srcset="scategory.png">
 
+
             <!-- PCでは横長画像 -->
+
             <img
                 src="category.png"
                 alt="Chocolate Craft Campus カテゴリー">
@@ -44,48 +85,32 @@
     <script>
 
         const heroDoor = document.getElementById("heroDoor");
+
         const categoryScreen = document.getElementById("categoryScreen");
+
 
         heroDoor.addEventListener("click", function() {
 
+
             // TOP画像を左右に開く
+
             heroDoor.classList.add("open");
 
+
             // 1秒後にCATEGORY画面を表示
+
             setTimeout(function() {
 
                 categoryScreen.classList.add("show");
 
             }, 1000);
 
-        });
-
-    </script>
-
-</body>
-
-
-    <!-- TOP画像 -->
-    <div class="hero-door" id="heroDoor">
-
-        <div class="door door-left"></div>
-
-        <div class="door door-right"></div>
-
-    </div>
-
-
-    <script>
-
-        const heroDoor = document.getElementById("heroDoor");
-
-        heroDoor.addEventListener("click", function() {
-
-            heroDoor.classList.add("open");
 
         });
 
     </script>
 
+
 </body>
+
 </html>
