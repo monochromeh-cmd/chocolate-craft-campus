@@ -73,7 +73,24 @@
             }
 
         }
+/* CATEGORY画面 */
+.category-screen {
+    display: none;
+    width: 100%;
+    background-color: #1c120e;
+}
 
+/* CATEGORY画像 */
+.category-screen img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* CATEGORY表示 */
+.category-screen.show {
+    display: block;
+}
     </style>
 </head>
 
@@ -90,13 +107,42 @@
     </div>
 
 
+    <!-- CATEGORY画面 -->
+    <div class="category-screen" id="categoryScreen">
+
+        <picture>
+
+            <!-- スマホでは縦長画像 -->
+            <source
+                media="(max-width: 768px)"
+                srcset="scategory.png">
+
+            <!-- PCでは横長画像 -->
+            <img
+                src="category.png"
+                alt="Chocolate Craft Campus カテゴリー">
+
+        </picture>
+
+    </div>
+
+
     <script>
 
         const heroDoor = document.getElementById("heroDoor");
+        const categoryScreen = document.getElementById("categoryScreen");
 
         heroDoor.addEventListener("click", function() {
 
+            // TOP画像を左右に開く
             heroDoor.classList.add("open");
+
+            // 1秒後にCATEGORY画面を表示
+            setTimeout(function() {
+
+                categoryScreen.classList.add("show");
+
+            }, 1000);
 
         });
 
