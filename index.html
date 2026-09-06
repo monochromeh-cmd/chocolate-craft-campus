@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Chocolate Craft Campus</title>
 
+
     <style>
 
-        /* ページ全体 */
+        /* =========================
+           ページ全体
+        ========================= */
+
         body {
             margin: 0;
             background-color: #2b1a14;
         }
 
-        /* TOP画像を置く場所 */
+
+        /* =========================
+           TOP画像
+        ========================= */
+
         .hero-door {
             position: relative;
             width: 70%;
@@ -24,7 +34,9 @@
             cursor: pointer;
         }
 
+
         /* 左右の扉 */
+
         .door {
             position: absolute;
             top: 0;
@@ -38,19 +50,27 @@
             transition: transform 1s ease;
         }
 
+
         /* 左側 */
+
         .door-left {
             left: 0;
             background-position: left center;
         }
 
+
         /* 右側 */
+
         .door-right {
             right: 0;
             background-position: right center;
         }
 
-        /* クリックされた後 */
+
+        /* =========================
+           TOP画像をクリックした後
+        ========================= */
+
         .hero-door.open .door-left {
             transform: translateX(-100%);
         }
@@ -60,7 +80,10 @@
         }
 
 
-        /* スマホ */
+        /* =========================
+           スマホ用TOP画像
+        ========================= */
+
         @media (max-width: 768px) {
 
             .hero-door {
@@ -73,31 +96,69 @@
             }
 
         }
-/* CATEGORY画面 */
-.category-screen {
-    display: none;
-    width: 100%;
-    background-color: #1c120e;
-}
 
-/* CATEGORY画像 */
-.category-screen img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
 
-/* CATEGORY表示 */
-.category-screen.show {
-    display: block;
-}
+        /* =========================
+           CATEGORY画面
+        ========================= */
+
+        .category-screen {
+
+            width: 100%;
+
+            background-color: #1c120e;
+
+            /* 最初は見えない */
+            opacity: 0;
+
+            /* クリックされるまで操作できない */
+            visibility: hidden;
+
+            /* 少しだけ余裕を持たせる */
+            margin-top: 20px;
+
+            /* 表示するときのアニメーション */
+            transition: opacity 0.8s ease;
+
+        }
+
+
+        /* CATEGORY画像 */
+
+        .category-screen img {
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+        }
+
+
+        /* CATEGORY画面を表示 */
+
+        .category-screen.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+        }
+
+
     </style>
+
 </head>
 
 
 <body>
 
-    <!-- TOP画像 -->
+
+    <!-- =========================
+         TOP画像
+    ========================= -->
+
     <div class="hero-door" id="heroDoor">
 
         <div class="door door-left"></div>
@@ -107,17 +168,24 @@
     </div>
 
 
-    <!-- CATEGORY画面 -->
+
+    <!-- =========================
+         CATEGORY画面
+    ========================= -->
+
     <div class="category-screen" id="categoryScreen">
 
         <picture>
 
-            <!-- スマホでは縦長画像 -->
+            <!-- スマホでは縦長CATEGORY -->
+
             <source
                 media="(max-width: 768px)"
                 srcset="scategory.png">
 
-            <!-- PCでは横長画像 -->
+
+            <!-- PCでは横長CATEGORY -->
+
             <img
                 src="category.png"
                 alt="Chocolate Craft Campus カテゴリー">
@@ -127,26 +195,40 @@
     </div>
 
 
+
+    <!-- =========================
+         JavaScript
+    ========================= -->
+
     <script>
 
         const heroDoor = document.getElementById("heroDoor");
+
         const categoryScreen = document.getElementById("categoryScreen");
+
 
         heroDoor.addEventListener("click", function() {
 
-            // TOP画像を左右に開く
+
+            /* TOP画像を左右に開く */
+
             heroDoor.classList.add("open");
 
-            // 1秒後にCATEGORY画面を表示
+
+            /* 1秒後にCATEGORYを表示 */
+
             setTimeout(function() {
 
                 categoryScreen.classList.add("show");
 
             }, 1000);
 
+
         });
 
     </script>
 
+
 </body>
+
 </html>
