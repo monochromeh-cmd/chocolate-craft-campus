@@ -32,6 +32,7 @@
             margin: 0 auto;
             overflow: hidden;
             cursor: pointer;
+            z-index: 2;
         }
 
 
@@ -102,24 +103,19 @@
            CATEGORY画面
         ========================= */
 
-        .category-screen {
+         .category-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
 
             width: 100%;
 
             background-color: #1c120e;
 
-            /* 最初は見えない */
-            opacity: 0;
+            opacity: 1;
+            visibility: visible;
 
-            /* クリックされるまで操作できない */
-            visibility: hidden;
-
-            /* 少しだけ余裕を持たせる */
-            margin-top: 20px;
-
-            /* 表示するときのアニメーション */
-            transition: opacity 0.8s ease;
-
+            z-index: 1;
         }
 
 
@@ -204,25 +200,12 @@
 
         const heroDoor = document.getElementById("heroDoor");
 
-        const categoryScreen = document.getElementById("categoryScreen");
-
-
         heroDoor.addEventListener("click", function() {
 
 
             /* TOP画像を左右に開く */
 
             heroDoor.classList.add("open");
-
-
-            /* 1秒後にCATEGORYを表示 */
-
-            setTimeout(function() {
-
-                categoryScreen.classList.add("show");
-
-            }, 1000);
-
 
         });
 
@@ -232,3 +215,4 @@
 </body>
 
 </html>
+
