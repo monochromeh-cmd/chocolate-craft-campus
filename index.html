@@ -9,7 +9,6 @@
 
     <title>Chocolate Craft Campus</title>
 
-
     <style>
 
         /* =========================
@@ -99,41 +98,87 @@
 
         }
 
+
         /* =========================
            CATEGORY画面
         ========================= */
 
-         .category-screen {
+        .category-screen {
             position: absolute;
             top: 0;
             left: 50%;
+
             width: 70%;
 
             background-color: #1c120e;
 
             opacity: 1;
             visibility: visible;
+
             z-index: 1;
+
             transform: translateX(-50%);
         }
 
 
         /* CATEGORY画像 */
 
+        .category-screen picture {
+            display: block;
+        }
+
         .category-screen img {
-
             width: 100%;
-
             height: auto;
+            display: block;
+        }
+
+
+        /* =========================
+           店舗紹介への透明リンク
+        ========================= */
+
+        .category-link {
+            position: absolute;
 
             display: block;
 
+            z-index: 5;
+
+            background: transparent;
         }
+
+
+        /* PC：店舗紹介 */
+
+        .shop-link {
+            left: 2.9%;
+            top: 29.1%;
+
+            width: 17.8%;
+            height: 59%;
+        }
+
+
+        /* =========================
+           スマホ
+        ========================= */
 
         @media (max-width: 768px) {
 
             .category-screen {
                 width: 100%;
+            }
+
+
+            /* スマホ：店舗紹介 */
+
+            .shop-link {
+                left: 5%;
+                top: 28.3%;
+
+                width: 90%;
+                height: 11.6%;
             }
 
         }
@@ -159,7 +204,6 @@
     </div>
 
 
-
     <!-- =========================
          CATEGORY画面
     ========================= -->
@@ -168,23 +212,29 @@
 
         <picture>
 
-            <!-- スマホでは縦長CATEGORY -->
-
+            <!-- スマホ -->
             <source
                 media="(max-width: 768px)"
                 srcset="scategory.png">
 
-
-            <!-- PCでは横長CATEGORY -->
-
+            <!-- PC -->
             <img
                 src="category.png"
                 alt="Chocolate Craft Campus カテゴリー">
 
         </picture>
 
-    </div>
 
+        <!-- =========================
+             店舗紹介への透明リンク
+        ========================= -->
+
+        <a
+            href="shop.html"
+            class="category-link shop-link">
+        </a>
+
+    </div>
 
 
     <!-- =========================
@@ -196,7 +246,6 @@
         const heroDoor = document.getElementById("heroDoor");
 
         heroDoor.addEventListener("click", function() {
-
 
             /* TOP画像を左右に開く */
 
