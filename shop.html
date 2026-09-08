@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chocolate Shop Directory | Chocolate Craft Campus</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            background-color: #2b1a14;
+        }
+
+        .shop-screen {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .shop-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+
+            .shop-screen {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="shop-screen">
+
+        <picture>
+
+            <!-- スマホ用 -->
+            <source
+                media="(max-width: 768px)"
+                srcset="sjapan.png">
+
+            <!-- PC用 -->
+            <img
+                src="japan.png"
+                alt="Chocolate Shop Directory in Japan">
+
+        </picture>
+
+    </div>
+
+</body>
+
+</html>
