@@ -79,7 +79,11 @@
         .hero-door.open .door-right {
             transform: translateX(110%);
         }
-
+        
+        /* TOP画像が開いた後はクリックを邪魔しない */
+        .hero-door.open {
+            pointer-events: none;
+        }
 
         /* =========================
            スマホ用TOP画像
