@@ -80,12 +80,6 @@
             transform: translateX(110%);
         }
         
-        /* TOP画像が開いた後 */
-　　　　.hero-door.open.finished {
-    　　　　pointer-events: none;
-    　　　　z-index: 0;
-　　　　}
-
         /* =========================
            スマホ用TOP画像
         ========================= */
@@ -248,24 +242,26 @@
 
     <script>
 
-　　　const heroDoor = document.getElementById("heroDoor");
+<script>
 
-　　　heroDoor.addEventListener("click", function() {
+    const heroDoor = document.getElementById("heroDoor");
 
-    /* TOP画像を左右に開く */
-　　    heroDoor.classList.add("open");
+    heroDoor.addEventListener("click", function() {
 
-    /* 1秒後にTOP画像を完全に後ろへ移動 */
-　　    setTimeout(function() {
+        /* TOP画像を左右に開く */
+        heroDoor.classList.add("open");
 
-        heroDoor.classList.add("finished");
+        /* 1秒後にTOP画像をクリック対象から外す */
+        setTimeout(function() {
 
-　　    }, 1000);
+            heroDoor.style.pointerEvents = "none";
+            heroDoor.style.zIndex = "0";
 
-　　　});
+        }, 1000);
 
-    </script>
+    });
 
+</script>
 
 </body>
 
