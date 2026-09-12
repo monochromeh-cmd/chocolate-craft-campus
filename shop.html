@@ -1,3 +1,7 @@
+shop.html
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -33,6 +37,45 @@
             }
 
         }
+/* =========================
+   関東への透明リンク
+========================= */
+
+.shop-screen {
+    position: relative;
+}
+
+.kanto-link {
+    position: absolute;
+
+    display: block;
+
+    z-index: 5;
+
+    background: transparent;
+}
+/* PC：関東 */
+
+.kanto-link {
+    left: 70%;
+    top: 45%;
+    width: 20%;
+    height: 15%;
+}
+@media (max-width: 768px) {
+
+    .shop-screen {
+        width: 100%;
+    }
+
+    .kanto-link {
+        left: 68%;
+        top: 50%;
+        width: 25%;
+        height: 10%;
+    }
+
+}
 
     </style>
 
@@ -55,6 +98,14 @@
                 alt="Chocolate Shop Directory in Japan">
 
         </picture>
+
+        <!-- =========================
+             関東への透明リンク
+        ========================= -->
+<a
+    href="kanto.html"
+    class="kanto-link">
+</a>
 
     </div>
 
