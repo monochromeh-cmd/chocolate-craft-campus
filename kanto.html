@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kanto | Chocolate Shop Directory</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            background-color: #2b1a14;
+        }
+
+        .kanto-screen {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .kanto-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+
+            .kanto-screen {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="kanto-screen">
+
+        <picture>
+
+            <!-- スマホ用 -->
+            <source
+                media="(max-width: 768px)"
+                srcset="skanto.png">
+
+            <!-- PC用 -->
+            <img
+                src="kanto.png"
+                alt="Chocolate Shop Directory Kanto">
+
+        </picture>
+
+    </div>
+
+</body>
+
+</html>
