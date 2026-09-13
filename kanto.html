@@ -27,17 +27,144 @@
         .kanto-screen {
             width: 70%;
             margin: 0 auto;
+            position: relative;
         }
 
 
         /* =========================
-           画像
+           関東ページ画像
         ========================= */
 
         .kanto-screen img {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+
+        /* =========================
+           クラフトチョコレートワークス
+           透明クリックエリア
+        ========================= */
+
+        .craft-link {
+            position: absolute;
+
+            left: 19%;
+            top: 35%;
+            width: 30%;
+            height: 12%;
+
+            display: block;
+            z-index: 5;
+
+            background: transparent;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           ポップアップ背景
+        ========================= */
+
+        .modal {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.78);
+
+            display: none;
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 100;
+        }
+
+
+        /* =========================
+           ポップアップ表示
+        ========================= */
+
+        .modal.show {
+            display: flex;
+        }
+
+
+        /* =========================
+           店舗詳細画像
+        ========================= */
+
+        .modal-content {
+            position: relative;
+
+            width: 80%;
+            max-width: 1200px;
+
+            max-height: 90vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+
+            max-height: 90vh;
+
+            object-fit: contain;
+
+            display: block;
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.7);
+        }
+
+
+        /* =========================
+           閉じるボタン
+        ========================= */
+
+        .close-button {
+            position: absolute;
+
+            top: -20px;
+            right: -20px;
+
+            width: 45px;
+            height: 45px;
+
+            border: 1px solid #d8b56a;
+
+            border-radius: 50%;
+
+            background-color: #2b1a14;
+
+            color: #f5e8c8;
+
+            font-size: 28px;
+
+            line-height: 40px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            z-index: 110;
+        }
+
+
+        .close-button:hover {
+            background-color: #4a2c1f;
         }
 
 
@@ -49,6 +176,44 @@
 
             .kanto-screen {
                 width: 100%;
+            }
+
+
+            /* スマホ用クリックエリア */
+
+            .craft-link {
+                left: 12%;
+                top: 38%;
+                width: 36%;
+                height: 8%;
+            }
+
+
+            /* ポップアップ */
+
+            .modal-content {
+                width: 92%;
+                max-height: 85vh;
+            }
+
+
+            .modal-content img {
+                max-height: 85vh;
+            }
+
+
+            /* 閉じるボタン */
+
+            .close-button {
+                top: -15px;
+                right: -10px;
+
+                width: 40px;
+                height: 40px;
+
+                font-size: 24px;
+
+                line-height: 36px;
             }
 
         }
@@ -81,7 +246,125 @@
 
         </picture>
 
+
+        <!-- =========================
+             クラフトチョコレートワークス
+             透明リンク
+        ========================= -->
+
+        <a
+            href="#"
+            class="craft-link"
+            id="craftLink"
+            aria-label="クラフトチョコレートワークスの詳細を見る">
+        </a>
+
     </div>
+
+
+
+    <!-- =========================
+         店舗詳細ポップアップ
+    ========================= -->
+
+    <div
+        class="modal"
+        id="craftModal">
+
+        <div class="modal-content">
+
+            <!-- 閉じるボタン -->
+
+            <button
+                class="close-button"
+                id="closeButton"
+                aria-label="閉じる">
+                ×
+            </button>
+
+
+            <!-- 店舗詳細画像 -->
+
+            <img
+                src="tenpo001.png"
+                alt="クラフトチョコレートワークス 店舗詳細">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JavaScript
+    ========================= -->
+
+    <script>
+
+        const craftLink =
+            document.getElementById("craftLink");
+
+        const craftModal =
+            document.getElementById("craftModal");
+
+        const closeButton =
+            document.getElementById("closeButton");
+
+
+        /* =========================
+           店舗カードをクリック
+        ========================= */
+
+        craftLink.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            craftModal.classList.add("show");
+
+        });
+
+
+        /* =========================
+           ×ボタンで閉じる
+        ========================= */
+
+        closeButton.addEventListener("click", function() {
+
+            craftModal.classList.remove("show");
+
+        });
+
+
+        /* =========================
+           背景クリックで閉じる
+        ========================= */
+
+        craftModal.addEventListener("click", function(event) {
+
+            if (event.target === craftModal) {
+
+                craftModal.classList.remove("show");
+
+            }
+
+        });
+
+
+        /* =========================
+           ESCキーで閉じる
+        ========================= */
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                craftModal.classList.remove("show");
+
+            }
+
+        });
+
+    </script>
 
 
 </body>
