@@ -101,33 +101,25 @@
            店舗詳細画像
         ========================= */
 
-        .modal-content {
-            position: relative;
+            .modal-content picture {
+                display: block;
+                width: 100%;
+            }
 
-            width: 90%;
-            max-width: 1400px;
+            .modal-content img {
+                width: 100%;
+                height: auto;
 
-            max-height: 90vh;
+                max-height: 90vh;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+                object-fit: contain;
 
+                display: block;
 
-        .modal-content img {
-            width: 100%;
-            height: auto;
+                box-shadow:
+                    0 10px 40px rgba(0, 0, 0, 0.7);
+            }
 
-            max-height: 90vh;
-
-            object-fit: contain;
-
-            display: block;
-
-            box-shadow:
-                0 10px 40px rgba(0, 0, 0, 0.7);
-        }
 
         /* =========================
            閉じるボタン
@@ -284,9 +276,19 @@
 
             <!-- 店舗詳細画像 -->
 
-            <img
-                src="tenpo001.png"
-                alt="クラフトチョコレートワークス 店舗詳細">
+                <picture>
+
+                    <!-- スマホ用 -->
+                    <source
+                        media="(max-width: 768px)"
+                        srcset="stenpo001.png">
+
+                    <!-- PC用 -->
+                    <img
+                        src="tenpo001.png"
+                        alt="クラフトチョコレートワークス 店舗詳細">
+
+</picture>
 
         </div>
 
@@ -364,6 +366,11 @@
         });
 
     </script>
+
+
+</body>
+
+</html>
 
 
 </body>
