@@ -97,28 +97,46 @@
         }
 
 
-        /* =========================
-           店舗詳細画像
-        ========================= */
+/* =========================
+   店舗詳細ポップアップ
+========================= */
 
-            .modal-content picture {
-                display: block;
-                width: 100%;
-            }
+.modal-content {
+    position: relative;
 
-            .modal-content img {
-                width: 100%;
-                height: auto;
+    width: 90%;
+    max-width: 1400px;
 
-                max-height: 90vh;
+    max-height: 90vh;
 
-                object-fit: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-                display: block;
 
-                box-shadow:
-                    0 10px 40px rgba(0, 0, 0, 0.7);
-            }
+/* =========================
+   店舗詳細画像
+========================= */
+
+.modal-content picture {
+    display: block;
+    width: 100%;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+
+    max-height: 90vh;
+
+    object-fit: contain;
+
+    display: block;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.7);
+}
 
 
         /* =========================
@@ -366,11 +384,6 @@
         });
 
     </script>
-
-
-</body>
-
-</html>
 
 
 </body>
