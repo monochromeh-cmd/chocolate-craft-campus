@@ -195,7 +195,7 @@
 
             color: #d8b56a;
 
-            font-size: 11px;
+            font-size: 15px;
             letter-spacing: 3px;
 
             text-align: center;
@@ -207,7 +207,7 @@
 
 
         .visitor-counter img {
-            height: 18px;
+            height: 24px;
             width: auto;
 
             margin-left: 6px;
@@ -281,7 +281,7 @@
         /* TOP画像を左右に開く */
         heroDoor.classList.add("open");
 
-        /* 1秒後にTOP画像をクリック対象から外す */
+        /* 0.3秒後にTOP画像をクリック対象から外す */
         setTimeout(function() {
 
             heroDoor.style.pointerEvents = "none";
@@ -289,7 +289,7 @@
 
             document.querySelector(".visitor-counter").style.display = "none";
 
-        }, 1000);
+        }, 300);
 
     });
 
