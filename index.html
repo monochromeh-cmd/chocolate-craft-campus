@@ -2,240 +2,180 @@
 <html lang="ja">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Craft Campus</title>
 
-    <title>Chocolate Craft Campus</title>
+<style>
 
-    <style>
+/* =========================
+   全体
+========================= */
 
-        /* =========================
-           ページ全体
-        ========================= */
+body {
+    margin: 0;
+    background-color: #2b1a14;
+}
 
-        body {
-            margin: 0;
-            background-color: #2b1a14;
-        }
 
+/* =========================
+   TOP画像・扉
+========================= */
 
-        /* =========================
-           TOP画像
-        ========================= */
+.hero-door {
+    position: relative;
+    width: 70%;
+    aspect-ratio: 3 / 2;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 2;
+}
 
-        .hero-door {
-            position: relative;
-            width: 70%;
-            aspect-ratio: 3 / 2;
-            margin: 0 auto;
-            overflow: hidden;
-            cursor: pointer;
-            z-index: 2;
-        }
 
+/* 左右の扉 */
 
-        /* 左右の扉 */
+.door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
 
-        .door {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
+    background-image: url("hero.png");
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
 
-            background-image: url("hero.png");
-            background-size: 200% 100%;
-            background-repeat: no-repeat;
+    transition: transform 1s ease;
+}
 
-            transition: transform 1s ease;
-        }
 
+/* 左側 */
 
-        /* 左側 */
+.door-left {
+    left: 0;
+    background-position: left center;
+}
 
-        .door-left {
-            left: 0;
-            background-position: left center;
-        }
 
+/* 右側 */
 
-        /* 右側 */
+.door-right {
+    right: 0;
+    background-position: right center;
+}
 
-        .door-right {
-            right: 0;
-            background-position: right center;
-        }
 
+/* =========================
+   扉が開く
+========================= */
 
-        /* =========================
-           TOP画像をクリックした後
-        ========================= */
+.hero-door.open .door-left {
+    transform: translateX(-110%);
+}
 
-        .hero-door.open .door-left {
-            transform: translateX(-110%);
-        }
+.hero-door.open .door-right {
+    transform: translateX(110%);
+}
 
-        .hero-door.open .door-right {
-            transform: translateX(110%);
-        }
 
+/* =========================
+   スマートフォン
+========================= */
 
-        /* =========================
-           スマホ用TOP画像
-        ========================= */
+@media (max-width: 768px) {
 
-        @media (max-width: 768px) {
+    .hero-door {
+        width: 100%;
+        aspect-ratio: 832 / 1792;
+    }
 
-            .hero-door {
-                width: 100%;
-                aspect-ratio: 832 / 1792;
-            }
+    .door {
+        background-image: url("shero.png");
+    }
 
-            .door {
-                background-image: url("shero.png");
-            }
+}
 
-        }
 
+/* =========================
+   カテゴリー画面
+========================= */
 
-        /* =========================
-           CATEGORY画面
-        ========================= */
+.category-screen {
+    position: absolute;
+    top: 0;
+    left: 50%;
 
-        .category-screen {
-            position: absolute;
-            top: 0;
-            left: 50%;
+    width: 70%;
 
-            width: 70%;
+    background-color: #1c120e;
 
-            background-color: #1c120e;
+    opacity: 1;
+    visibility: visible;
 
-            opacity: 1;
-            visibility: visible;
+    z-index: 1;
 
-            z-index: 1;
+    transform: translateX(-50%);
+}
 
-            transform: translateX(-50%);
-        }
 
+/* カテゴリー画像 */
 
-        /* CATEGORY画像 */
+.category-screen picture {
+    display: block;
+}
 
-        .category-screen picture {
-            display: block;
-        }
+.category-screen img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
-        .category-screen img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
 
+/* =========================
+   カテゴリーへのリンク
+========================= */
 
-        /* =========================
-           店舗紹介への透明リンク
-        ========================= */
+.category-link {
+    position: absolute;
+    display: block;
 
-        .category-link {
-            position: absolute;
+    z-index: 5;
 
-            display: block;
+    background: transparent;
+}
 
-            z-index: 5;
 
-            background: transparent;
-        }
+/* 店舗紹介 */
 
+.shop-link {
+    left: 2.9%;
+    top: 29.1%;
+    width: 17.8%;
+    height: 59%;
+}
 
-        /* PC：店舗紹介 */
 
-        .shop-link {
-            left: 2.9%;
-            top: 29.1%;
+/* =========================
+   スマートフォン用
+========================= */
 
-            width: 17.8%;
-            height: 59%;
-        }
+@media (max-width: 768px) {
 
+    .category-screen {
+        width: 100%;
+    }
 
-        /* =========================
-           スマホ
-        ========================= */
+    .shop-link {
+        left: 5%;
+        top: 28.3%;
+        width: 90%;
+        height: 11.6%;
+    }
 
-        @media (max-width: 768px) {
+}
 
-            .category-screen {
-                width: 100%;
-            }
-
-
-            /* スマホ：店舗紹介 */
-
-            .shop-link {
-                left: 5%;
-                top: 28.3%;
-
-                width: 90%;
-                height: 11.6%;
-            }
-
-        }
-
-
-        /* =========================
-           訪問カウンター
-        ========================= */
-
-        .visitor-counter {
-            position: absolute;
-
-            bottom: 20px;
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            color: #d8b56a;
-
-            /* PC */
-            font-size: 36px;
-
-            letter-spacing: 4px;
-
-            text-align: center;
-
-            opacity: 0.85;
-
-            z-index: 10;
-
-            white-space: nowrap;
-        }
-
-
-        /* 訪問数 */
-
-        .visitor-count {
-            margin-left: 8px;
-        }
-
-
-        /* =========================
-           スマホ：訪問カウンター
-        ========================= */
-
-        @media (max-width: 768px) {
-
-            .visitor-counter {
-                font-size: 15px;
-
-                letter-spacing: 3px;
-
-                bottom: 20px;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
 
@@ -243,149 +183,81 @@
 <body>
 
 
-    <!-- =========================
-         TOP画像
-    ========================= -->
+<!-- =========================
+     TOP画像
+========================= -->
 
-    <div class="hero-door" id="heroDoor">
+<div class="hero-door" id="heroDoor">
 
-        <div class="door door-left"></div>
+    <div class="door door-left"></div>
 
-        <div class="door door-right"></div>
+    <div class="door door-right"></div>
 
-    </div>
-
-
-    <!-- =========================
-         CATEGORY画面
-    ========================= -->
-
-    <div class="category-screen" id="categoryScreen">
-
-        <picture>
-
-            <!-- スマホ -->
-            <source
-                media="(max-width: 768px)"
-                srcset="scategory.png">
-
-            <!-- PC -->
-            <img
-                src="category.png"
-                alt="Chocolate Craft Campus カテゴリー">
-
-        </picture>
+</div>
 
 
-        <!-- =========================
-             店舗紹介への透明リンク
-        ========================= -->
 
-        <a
-            href="shop.html"
-            class="category-link shop-link">
-        </a>
+<!-- =========================
+     カテゴリー画面
+========================= -->
 
-    </div>
+<div class="category-screen" id="categoryScreen">
 
+    <picture>
 
-    <!-- =========================
-         訪問カウンター
-    ========================= -->
+        <source
+            media="(max-width:768px)"
+            srcset="scategory.png">
 
-    <div class="visitor-counter" id="visitorCounter">
+        <img
+            src="category.png"
+            alt="Chocolate Craft Campus カテゴリー">
 
-        VISITS
-
-        <span
-            class="visitor-count"
-            id="visitorCount">
-            ...
-        </span>
-
-    </div>
+    </picture>
 
 
-    <!-- =========================
-         JavaScript
-    ========================= -->
+    <!-- 店舗紹介へのリンク -->
 
-    <script>
+    <a
+        href="shop.html"
+        class="category-link shop-link">
+    </a>
 
-        const heroDoor =
-            document.getElementById("heroDoor");
-
-        const visitorCounter =
-            document.getElementById("visitorCounter");
-
-        const visitorCount =
-            document.getElementById("visitorCount");
+</div>
 
 
-        /* =========================
-           TOP画像をクリック
-        ========================= */
 
-        heroDoor.addEventListener("click", function() {
+<!-- =========================
+     JavaScript
+========================= -->
 
-            /* TOP画像を左右に開く */
-            heroDoor.classList.add("open");
+<script>
 
-
-            /* 0.3秒後にVISITSを消す */
-            setTimeout(function() {
-
-                heroDoor.style.pointerEvents = "none";
-                heroDoor.style.zIndex = "0";
-
-                visitorCounter.style.display = "none";
-
-            }, 300);
-
-        });
+const heroDoor = document.getElementById("heroDoor");
 
 
-        /* =========================
-           訪問数を取得
-        ========================= */
+/* TOP画像をクリック */
 
-        fetch(
-            "https://librecounter.org/monochromeh-cmd.github.io/siteStats"
-        )
+heroDoor.addEventListener("click", function() {
 
-        .then(function(response) {
+    /* 扉を開く */
 
-            return response.json();
-
-        })
-
-        .then(function(data) {
-
-            console.log("LibreCounter:", data);
-
-        })
-
-        .catch(function(error) {
-
-            console.log(
-                "訪問数を取得できませんでした。",
-                error
-            );
-
-        });
-
-    </script>
+    heroDoor.classList.add("open");
 
 
-    <!-- =========================
-         LibreCounter
-    ========================= -->
+    /* 扉を開いたあと、カテゴリーを操作できるようにする */
 
-    <img
-        src="https://librecounter.org/counter.svg"
-        referrerpolicy="unsafe-url"
-        alt=""
-        style="display:none;">
+    setTimeout(function() {
+
+        heroDoor.style.pointerEvents = "none";
+
+        heroDoor.style.zIndex = "0";
+
+    }, 300);
+
+});
+
+</script>
 
 
 </body>
