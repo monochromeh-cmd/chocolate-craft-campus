@@ -31,16 +31,35 @@
 
 
         /* =========================
+           北海道・東北への透明リンク
+        ========================= */
+
+        .hokkaido-tohoku-link {
+            position: absolute;
+            display: block;
+            z-index: 5;
+            background: transparent;
+        }
+
+
+        /* PC：北海道・東北 */
+
+        .hokkaido-tohoku-link {
+            left: 68%;
+            top: 40%;
+            width: 25%;
+            height: 13%;
+        }
+
+
+        /* =========================
            関東への透明リンク
         ========================= */
 
         .kanto-link {
             position: absolute;
-
             display: block;
-
             z-index: 5;
-
             background: transparent;
         }
 
@@ -61,11 +80,8 @@
 
         .kansai-link {
             position: absolute;
-
             display: block;
-
             z-index: 5;
-
             background: transparent;
         }
 
@@ -88,6 +104,18 @@
 
             .shop-screen {
                 width: 100%;
+            }
+
+
+            /* -------------------------
+               北海道・東北
+            ------------------------- */
+
+            .hokkaido-tohoku-link {
+                left: 68%;
+                top: 42%;
+                width: 25%;
+                height: 10%;
             }
 
 
@@ -133,16 +161,26 @@
 
             <source
                 media="(max-width: 768px)"
-                srcset="sjapan.png">
+                srcset="sjapan(20260926-115346).png">
 
 
             <!-- PC用 -->
 
             <img
-                src="japan.png"
+                src="japan(8).png"
                 alt="Chocolate Shop Directory in Japan">
 
         </picture>
+
+
+        <!-- =========================
+             北海道・東北への透明リンク
+        ========================= -->
+
+        <a
+            href="hokkaido-tohoku.html"
+            class="hokkaido-tohoku-link">
+        </a>
 
 
         <!-- =========================
