@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hokuriku / Chubu | Chocolate Craft Campus</title>
+
+
+    <style>
+
+        /* =========================
+           ページ全体
+        ========================= */
+
+        body {
+            margin: 0;
+            background-color: #2b1a14;
+        }
+
+
+        /* =========================
+           北陸・中部ページ
+        ========================= */
+
+        .hokuriku-chubu-screen {
+            width: 70%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+
+        /* =========================
+           北陸・中部ページ画像
+        ========================= */
+
+        .hokuriku-chubu-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+
+        /* =========================
+           アルチザン パレドオール
+           透明クリックエリア
+        ========================= */
+
+        .artisan-link {
+            position: absolute;
+
+            left: 12%;
+            top: 34%;
+            width: 37%;
+            height: 12%;
+
+            display: block;
+            z-index: 5;
+
+            background: transparent;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           ポップアップ背景
+        ========================= */
+
+        .modal {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.78);
+
+            display: none;
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 100;
+        }
+
+
+        /* =========================
+           ポップアップ表示
+        ========================= */
+
+        .modal.show {
+            display: flex;
+        }
+
+
+        /* =========================
+           店舗詳細ポップアップ
+        ========================= */
+
+        .modal-content {
+            position: relative;
+
+            width: 90%;
+            max-width: 1400px;
+
+            max-height: 90vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* =========================
+           店舗詳細画像
+        ========================= */
+
+        .modal-content picture {
+            display: block;
+
+            max-width: 100%;
+            max-height: 90vh;
+        }
+
+
+        .modal-content img {
+            width: auto;
+            height: auto;
+
+            max-width: 90vw;
+            max-height: 90vh;
+
+            object-fit: contain;
+
+            display: block;
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.7);
+        }
+
+
+        /* =========================
+           閉じるボタン
+        ========================= */
+
+        .close-button {
+            position: absolute;
+
+            top: 8px;
+            right: 8px;
+
+            width: 45px;
+            height: 45px;
+
+            border: 1px solid #d8b56a;
+
+            border-radius: 50%;
+
+            background-color: #2b1a14;
+
+            color: #f5e8c8;
+
+            font-size: 28px;
+
+            line-height: 40px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            z-index: 110;
+        }
+
+
+        .close-button:hover {
+            background-color: #4a2c1f;
+        }
+
+
+        /* =========================
+           スマートフォン
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            .hokuriku-chubu-screen {
+                width: 100%;
+            }
+
+
+            /* -------------------------
+               アルチザン パレドオール
+               スマホ用クリックエリア
+            ------------------------- */
+
+            .artisan-link {
+                left: 12%;
+                top: 36%;
+                width: 37%;
+                height: 8%;
+            }
+
+
+            /* -------------------------
+               ポップアップ
+            ------------------------- */
+
+            .modal {
+                padding: 12px;
+
+                box-sizing: border-box;
+            }
+
+
+            .modal-content {
+                width: 94%;
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            .modal-content picture {
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            .modal-content img {
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            /* -------------------------
+               閉じるボタン
+            ------------------------- */
+
+            .close-button {
+                top: 6px;
+                right: 6px;
+
+                width: 40px;
+                height: 40px;
+
+                font-size: 24px;
+
+                line-height: 36px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         北陸・中部エリア
+    ========================= -->
+
+    <div class="hokuriku-chubu-screen">
+
+        <picture>
+
+            <!-- スマホ用 -->
+            <source
+                media="(max-width: 768px)"
+                srcset="s-hokuriku-chubu.png">
+
+            <!-- PC用 -->
+            <img
+                src="hokuriku-chubu.png"
+                alt="Chocolate Shop Directory 北陸・中部エリア">
+
+        </picture>
+
+
+        <!-- =========================
+             アルチザン パレドオール
+             透明クリックエリア
+        ========================= -->
+
+        <a
+            href="#"
+            class="artisan-link"
+            id="artisanLink"
+            aria-label="アルチザン パレドオールの詳細を見る">
+        </a>
+
+    </div>
+
+
+
+    <!-- =========================
+         店舗詳細ポップアップ
+    ========================= -->
+
+    <div
+        class="modal"
+        id="artisanModal">
+
+        <div class="modal-content">
+
+
+            <!-- 閉じるボタン -->
+
+            <button
+                class="close-button"
+                id="closeButton"
+                aria-label="閉じる">
+                ×
+            </button>
+
+
+            <!-- =========================
+                 店舗詳細画像
+                 
+                 ※店舗詳細画像が完成したら
+                 ここにファイル名を入れます
+            ========================= -->
+
+            <picture>
+
+                <!-- スマホ用 -->
+                <source
+                    media="(max-width: 768px)"
+                    srcset="stenpo004.png">
+
+                <!-- PC用 -->
+                <img
+                    src="tenpo004.png"
+                    alt="アルチザン パレドオール 店舗詳細">
+
+            </picture>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JavaScript
+    ========================= -->
+
+    <script>
+
+        const artisanLink =
+            document.getElementById("artisanLink");
+
+        const artisanModal =
+            document.getElementById("artisanModal");
+
+        const closeButton =
+            document.getElementById("closeButton");
+
+
+        /* =========================
+           店舗カードをクリック
+        ========================= */
+
+        artisanLink.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            artisanModal.classList.add("show");
+
+        });
+
+
+        /* =========================
+           ×ボタンで閉じる
+        ========================= */
+
+        closeButton.addEventListener("click", function() {
+
+            artisanModal.classList.remove("show");
+
+        });
+
+
+        /* =========================
+           背景クリックで閉じる
+        ========================= */
+
+        artisanModal.addEventListener("click", function(event) {
+
+            if (event.target === artisanModal) {
+
+                artisanModal.classList.remove("show");
+
+            }
+
+        });
+
+
+        /* =========================
+           ESCキーで閉じる
+        ========================= */
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                artisanModal.classList.remove("show");
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>
