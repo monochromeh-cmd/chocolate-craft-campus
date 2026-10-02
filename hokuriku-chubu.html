@@ -145,6 +145,17 @@
 
 
         /* =========================
+           店舗詳細画像のリンク
+        ========================= */
+
+        .modal-content a {
+            display: block;
+            max-width: 100%;
+            max-height: 90vh;
+        }
+
+
+        /* =========================
            閉じるボタン
         ========================= */
 
@@ -219,6 +230,12 @@
 
             .modal-content {
                 width: 94%;
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            .modal-content a {
                 max-width: 94vw;
                 max-height: 84vh;
             }
@@ -322,24 +339,31 @@
 
             <!-- =========================
                  店舗詳細画像
-                 
-                 ※店舗詳細画像が完成したら
-                 ここにファイル名を入れます
+
+                 画像をクリックすると
+                 Instagramへ移動
             ========================= -->
 
-            <picture>
+            <a
+                href="https://www.instagram.com/paletdor_kiyosato/"
+                target="_blank"
+                rel="noopener noreferrer">
 
-                <!-- スマホ用 -->
-                <source
-                    media="(max-width: 768px)"
-                    srcset="stenpo004.png">
+                <picture>
 
-                <!-- PC用 -->
-                <img
-                    src="tenpo004.png"
-                    alt="アルチザン パレドオール 店舗詳細">
+                    <!-- スマホ用 -->
+                    <source
+                        media="(max-width: 768px)"
+                        srcset="stenpo004.png">
 
-            </picture>
+                    <!-- PC用 -->
+                    <img
+                        src="tenpo004.png"
+                        alt="アルチザン パレドオール 店舗詳細">
+
+                </picture>
+
+            </a>
 
 
         </div>
