@@ -125,6 +125,29 @@
 
 
         /* =========================
+           中国・四国への透明リンク
+        ========================= */
+
+        .chuugoku-shikoku-link {
+            position: absolute;
+            display: block;
+            z-index: 5;
+            background: transparent;
+        }
+
+
+        /* PC：中国・四国 */
+
+        .chuugoku-shikoku-link {
+            left: 32%;
+            top: 59%;
+            width: 20%;
+            height: 13%;
+        }
+
+
+
+        /* =========================
            九州・沖縄への透明リンク
         ========================= */
 
@@ -207,6 +230,18 @@
 
 
             /* -------------------------
+               中国・四国
+            ------------------------- */
+
+            .chuugoku-shikoku-link {
+                left: 30%;
+                top: 61%;
+                width: 25%;
+                height: 9%;
+            }
+
+
+            /* -------------------------
                九州・沖縄
             ------------------------- */
 
@@ -237,13 +272,13 @@
 
             <source
                 media="(max-width: 768px)"
-                srcset="sjapan.png">
+                srcset="s-chuugoku-shikoku.png">
 
 
             <!-- PC用 -->
 
             <img
-                src="japan.png"
+                src="chuugoku-shikoku.png"
                 alt="Chocolate Shop Directory in Japan">
 
         </picture>
@@ -290,6 +325,17 @@
         <a
             href="kansai.html"
             class="kansai-link">
+        </a>
+
+
+
+        <!-- =========================
+             中国・四国への透明リンク
+        ========================= -->
+
+        <a
+            href="chuugoku-shikoku.html"
+            class="chuugoku-shikoku-link">
         </a>
 
 
