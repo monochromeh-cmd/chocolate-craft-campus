@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chugoku / Shikoku | Chocolate Craft Campus</title>
+
+
+    <style>
+
+        /* =========================
+           ページ全体
+        ========================= */
+
+        body {
+            margin: 0;
+            background-color: #2b1a14;
+        }
+
+
+        /* =========================
+           中国・四国ページ
+        ========================= */
+
+        .chuugoku-shikoku-screen {
+            width: 70%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+
+        /* =========================
+           中国・四国ページ画像
+        ========================= */
+
+        .chuugoku-shikoku-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+
+        /* =========================
+           ラ ショコラトリ ナナイロ
+           透明クリックエリア
+        ========================= */
+
+        .nanairo-link {
+            position: absolute;
+
+            left: 8%;
+            top: 34%;
+            width: 37%;
+            height: 12%;
+
+            display: block;
+            z-index: 5;
+
+            background: transparent;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           ポップアップ背景
+        ========================= */
+
+        .modal {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.78);
+
+            display: none;
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 100;
+        }
+
+
+        /* =========================
+           ポップアップ表示
+        ========================= */
+
+        .modal.show {
+            display: flex;
+        }
+
+
+        /* =========================
+           店舗詳細ポップアップ
+        ========================= */
+
+        .modal-content {
+            position: relative;
+
+            width: 90%;
+            max-width: 1400px;
+
+            max-height: 90vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* =========================
+           店舗詳細画像
+        ========================= */
+
+        .modal-content picture {
+            display: block;
+
+            max-width: 100%;
+            max-height: 90vh;
+        }
+
+
+        .modal-content img {
+            width: auto;
+            height: auto;
+
+            max-width: 90vw;
+            max-height: 90vh;
+
+            object-fit: contain;
+
+            display: block;
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.7);
+        }
+
+
+        /* =========================
+           店舗詳細画像のリンク
+        ========================= */
+
+        .modal-content a {
+            display: block;
+            max-width: 100%;
+            max-height: 90vh;
+        }
+
+
+        /* =========================
+           閉じるボタン
+        ========================= */
+
+        .close-button {
+            position: absolute;
+
+            top: 8px;
+            right: 8px;
+
+            width: 45px;
+            height: 45px;
+
+            border: 1px solid #d8b56a;
+
+            border-radius: 50%;
+
+            background-color: #2b1a14;
+
+            color: #f5e8c8;
+
+            font-size: 28px;
+
+            line-height: 40px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            z-index: 110;
+        }
+
+
+        .close-button:hover {
+            background-color: #4a2c1f;
+        }
+
+
+        /* =========================
+           スマートフォン
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            .chuugoku-shikoku-screen {
+                width: 100%;
+            }
+
+
+            /* -------------------------
+               ラ ショコラトリ ナナイロ
+               スマホ用クリックエリア
+            ------------------------- */
+
+            .nanairo-link {
+                left: 8%;
+                top: 36%;
+                width: 37%;
+                height: 8%;
+            }
+
+
+            /* -------------------------
+               ポップアップ
+            ------------------------- */
+
+            .modal {
+                padding: 12px;
+
+                box-sizing: border-box;
+            }
+
+
+            .modal-content {
+                width: 94%;
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            .modal-content a {
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            .modal-content picture {
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            .modal-content img {
+                max-width: 94vw;
+                max-height: 84vh;
+            }
+
+
+            /* -------------------------
+               閉じるボタン
+            ------------------------- */
+
+            .close-button {
+                top: 6px;
+                right: 6px;
+
+                width: 40px;
+                height: 40px;
+
+                font-size: 24px;
+
+                line-height: 36px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         中国・四国エリア
+    ========================= -->
+
+    <div class="chuugoku-shikoku-screen">
+
+        <picture>
+
+            <!-- スマホ用 -->
+
+            <source
+                media="(max-width: 768px)"
+                srcset="s-chuugoku-shikoku.png">
+
+
+            <!-- PC用 -->
+
+            <img
+                src="chuugoku-shikoku.png"
+                alt="Chocolate Shop Directory 中国・四国エリア">
+
+        </picture>
+
+
+        <!-- =========================
+             ラ ショコラトリ ナナイロ
+             透明クリックエリア
+        ========================= -->
+
+        <a
+            href="#"
+            class="nanairo-link"
+            id="nanairoLink"
+            aria-label="ラ ショコラトリ ナナイロの詳細を見る">
+        </a>
+
+    </div>
+
+
+
+    <!-- =========================
+         店舗詳細ポップアップ
+    ========================= -->
+
+    <div
+        class="modal"
+        id="nanairoModal">
+
+        <div class="modal-content">
+
+
+            <!-- 閉じるボタン -->
+
+            <button
+                class="close-button"
+                id="closeButton"
+                aria-label="閉じる">
+                ×
+            </button>
+
+
+            <!-- =========================
+                 店舗詳細画像
+
+                 後からInstagram等の
+                 リンクを設定可能
+            ========================= -->
+
+            <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <picture>
+
+                    <!-- スマホ用 -->
+
+                    <source
+                        media="(max-width: 768px)"
+                        srcset="stenpo-nanairo.png">
+
+
+                    <!-- PC用 -->
+
+                    <img
+                        src="tenpo-nanairo.png"
+                        alt="ラ ショコラトリ ナナイロ 店舗詳細">
+
+                </picture>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         JavaScript
+    ========================= -->
+
+    <script>
+
+        const nanairoLink =
+            document.getElementById("nanairoLink");
+
+        const nanairoModal =
+            document.getElementById("nanairoModal");
+
+        const closeButton =
+            document.getElementById("closeButton");
+
+
+        /* =========================
+           店舗カードをクリック
+        ========================= */
+
+        nanairoLink.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            nanairoModal.classList.add("show");
+
+        });
+
+
+        /* =========================
+           ×ボタンで閉じる
+        ========================= */
+
+        closeButton.addEventListener("click", function() {
+
+            nanairoModal.classList.remove("show");
+
+        });
+
+
+        /* =========================
+           背景クリックで閉じる
+        ========================= */
+
+        nanairoModal.addEventListener("click", function(event) {
+
+            if (event.target === nanairoModal) {
+
+                nanairoModal.classList.remove("show");
+
+            }
+
+        });
+
+
+        /* =========================
+           ESCキーで閉じる
+        ========================= */
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                nanairoModal.classList.remove("show");
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>
