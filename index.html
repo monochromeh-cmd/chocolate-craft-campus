@@ -72,11 +72,12 @@ body {
 
 
 /* =========================
-   カテゴリー画面・世界画面 共通
+   各画面 共通
 ========================= */
 
 .category-screen,
-.world-screen {
+.world-screen,
+.history-screen {
     position: absolute;
     top: 0;
     left: 50%;
@@ -88,25 +89,36 @@ body {
     transform: translateX(-50%);
 }
 
+
+/* メインカテゴリー */
+
 .category-screen {
     z-index: 1;
 }
 
-.world-screen {
+
+/* 各カテゴリーの詳細画面 */
+
+.world-screen,
+.history-screen {
     display: none;
     z-index: 3;
 }
 
 
-/* 画像 */
+/* =========================
+   画像表示
+========================= */
 
 .category-screen picture,
-.world-screen picture {
+.world-screen picture,
+.history-screen picture {
     display: block;
 }
 
 .category-screen img,
-.world-screen img {
+.world-screen img,
+.history-screen img {
     width: 100%;
     height: auto;
     display: block;
@@ -145,11 +157,23 @@ body {
 }
 
 
+/* チョコレートの歴史 */
+
+.history-link {
+    left: 41.1%;
+    top: 29.1%;
+    width: 17.8%;
+    height: 59%;
+}
+
+
 /* =========================
    スマートフォン
 ========================= */
 
 @media (max-width: 768px) {
+
+    /* TOP画像 */
 
     .hero-door {
         width: 100%;
@@ -160,12 +184,17 @@ body {
         background-image: url("shero.png");
     }
 
+
+    /* 各画面 */
+
     .category-screen,
-    .world-screen {
+    .world-screen,
+    .history-screen {
         width: 100%;
     }
 
-    /* 店舗紹介 */
+
+    /* チョコレート店舗紹介 */
 
     .shop-link {
         left: 5%;
@@ -174,11 +203,22 @@ body {
         height: 12.4%;
     }
 
+
     /* チョコレートの世界 */
 
     .world-link {
         left: 5%;
         top: 41.8%;
+        width: 90%;
+        height: 12.4%;
+    }
+
+
+    /* チョコレートの歴史 */
+
+    .history-link {
+        left: 5%;
+        top: 54.8%;
         width: 90%;
         height: 12.4%;
     }
@@ -243,6 +283,16 @@ body {
         aria-label="チョコレートの世界">
     </a>
 
+
+    <!-- チョコレートの歴史 -->
+
+    <a
+        href="#"
+        class="category-link history-link"
+        id="historyLink"
+        aria-label="チョコレートの歴史">
+    </a>
+
 </div>
 
 
@@ -268,12 +318,36 @@ body {
 
 
 <!-- =========================
+     チョコレートの歴史
+========================= -->
+
+<div class="history-screen" id="historyScreen">
+
+    <picture>
+
+        <source
+            media="(max-width:768px)"
+            srcset="shistory.png">
+
+        <img
+            src="history.png"
+            alt="チョコレートの歴史">
+
+    </picture>
+
+</div>
+
+
+<!-- =========================
      JavaScript
 ========================= -->
 
 <script>
 
-const heroDoor = document.getElementById("heroDoor");
+/* 各画面の取得 */
+
+const heroDoor =
+    document.getElementById("heroDoor");
 
 const categoryScreen =
     document.getElementById("categoryScreen");
@@ -281,11 +355,19 @@ const categoryScreen =
 const worldScreen =
     document.getElementById("worldScreen");
 
+const historyScreen =
+    document.getElementById("historyScreen");
+
 const worldLink =
     document.getElementById("worldLink");
 
+const historyLink =
+    document.getElementById("historyLink");
 
-/* TOP画像をクリックすると扉が開く */
+
+/* =========================
+   TOP画像をクリックすると扉が開く
+========================= */
 
 heroDoor.addEventListener("click", function() {
 
@@ -301,7 +383,9 @@ heroDoor.addEventListener("click", function() {
 });
 
 
-/* チョコレートの世界をクリック */
+/* =========================
+   チョコレートの世界をクリック
+========================= */
 
 worldLink.addEventListener("click", function(event) {
 
@@ -311,12 +395,38 @@ worldLink.addEventListener("click", function(event) {
 
     categoryScreen.style.display = "none";
 
+    /* 歴史画面を隠す */
+
+    historyScreen.style.display = "none";
+
     /* チョコレートの世界を表示 */
 
     worldScreen.style.display = "block";
 
 });
 
+
+/* =========================
+   チョコレートの歴史をクリック
+========================= */
+
+historyLink.addEventListener("click", function(event) {
+
+    event.preventDefault();
+
+    /* メインカテゴリーを隠す */
+
+    categoryScreen.style.display = "none";
+
+    /* チョコレートの世界を隠す */
+
+    worldScreen.style.display = "none";
+
+    /* チョコレートの歴史を表示 */
+
+    historyScreen.style.display = "block";
+
+});
 
 </script>
 
