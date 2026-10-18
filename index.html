@@ -77,7 +77,8 @@ body {
 
 .category-screen,
 .world-screen,
-.history-screen {
+.history-screen,
+.column-screen {
     position: absolute;
     top: 0;
     left: 50%;
@@ -100,7 +101,8 @@ body {
 /* 各カテゴリーの詳細画面 */
 
 .world-screen,
-.history-screen {
+.history-screen,
+.column-screen {
     display: none;
     z-index: 3;
 }
@@ -112,13 +114,15 @@ body {
 
 .category-screen picture,
 .world-screen picture,
-.history-screen picture {
+.history-screen picture,
+.column-screen picture {
     display: block;
 }
 
 .category-screen img,
 .world-screen img,
-.history-screen img {
+.history-screen img,
+.column-screen img {
     width: 100%;
     height: auto;
     display: block;
@@ -136,6 +140,10 @@ body {
     background: transparent;
 }
 
+
+/* =========================
+   PC用 クリック位置
+========================= */
 
 /* チョコレート店舗紹介 */
 
@@ -167,6 +175,16 @@ body {
 }
 
 
+/* チョコレートコラム */
+
+.column-link {
+    left: 60.3%;
+    top: 29.1%;
+    width: 17.8%;
+    height: 59%;
+}
+
+
 /* =========================
    スマートフォン
 ========================= */
@@ -189,7 +207,8 @@ body {
 
     .category-screen,
     .world-screen,
-    .history-screen {
+    .history-screen,
+    .column-screen {
         width: 100%;
     }
 
@@ -219,6 +238,16 @@ body {
     .history-link {
         left: 5%;
         top: 54.8%;
+        width: 90%;
+        height: 12.4%;
+    }
+
+
+    /* チョコレートコラム */
+
+    .column-link {
+        left: 5%;
+        top: 67.8%;
         width: 90%;
         height: 12.4%;
     }
@@ -293,6 +322,16 @@ body {
         aria-label="チョコレートの歴史">
     </a>
 
+
+    <!-- チョコレートコラム -->
+
+    <a
+        href="#"
+        class="category-link column-link"
+        id="columnLink"
+        aria-label="チョコレートコラム">
+    </a>
+
 </div>
 
 
@@ -339,12 +378,35 @@ body {
 
 
 <!-- =========================
+     チョコレートコラム
+========================= -->
+
+<div class="column-screen" id="columnScreen">
+
+    <picture>
+
+        <source
+            media="(max-width:768px)"
+            srcset="scolumn.png">
+
+        <img
+            src="column.png"
+            alt="Chocolate Column チョコレートコラム">
+
+    </picture>
+
+</div>
+
+
+<!-- =========================
      JavaScript
 ========================= -->
 
 <script>
 
-/* 各画面の取得 */
+/* =========================
+   各画面の取得
+========================= */
 
 const heroDoor =
     document.getElementById("heroDoor");
@@ -358,11 +420,17 @@ const worldScreen =
 const historyScreen =
     document.getElementById("historyScreen");
 
+const columnScreen =
+    document.getElementById("columnScreen");
+
 const worldLink =
     document.getElementById("worldLink");
 
 const historyLink =
     document.getElementById("historyLink");
+
+const columnLink =
+    document.getElementById("columnLink");
 
 
 /* =========================
@@ -384,47 +452,63 @@ heroDoor.addEventListener("click", function() {
 
 
 /* =========================
-   チョコレートの世界をクリック
+   詳細画面の切り替え
+========================= */
+
+function showDetailScreen(screen) {
+
+    /* メインカテゴリーを隠す */
+
+    categoryScreen.style.display = "none";
+
+    /* すべての詳細画面を隠す */
+
+    worldScreen.style.display = "none";
+    historyScreen.style.display = "none";
+    columnScreen.style.display = "none";
+
+    /* 選択した画面を表示 */
+
+    screen.style.display = "block";
+
+}
+
+
+/* =========================
+   チョコレートの世界
 ========================= */
 
 worldLink.addEventListener("click", function(event) {
 
     event.preventDefault();
 
-    /* メインカテゴリーを隠す */
-
-    categoryScreen.style.display = "none";
-
-    /* 歴史画面を隠す */
-
-    historyScreen.style.display = "none";
-
-    /* チョコレートの世界を表示 */
-
-    worldScreen.style.display = "block";
+    showDetailScreen(worldScreen);
 
 });
 
 
 /* =========================
-   チョコレートの歴史をクリック
+   チョコレートの歴史
 ========================= */
 
 historyLink.addEventListener("click", function(event) {
 
     event.preventDefault();
 
-    /* メインカテゴリーを隠す */
+    showDetailScreen(historyScreen);
 
-    categoryScreen.style.display = "none";
+});
 
-    /* チョコレートの世界を隠す */
 
-    worldScreen.style.display = "none";
+/* =========================
+   チョコレートコラム
+========================= */
 
-    /* チョコレートの歴史を表示 */
+columnLink.addEventListener("click", function(event) {
 
-    historyScreen.style.display = "block";
+    event.preventDefault();
+
+    showDetailScreen(columnScreen);
 
 });
 
@@ -433,3 +517,4 @@ historyLink.addEventListener("click", function(event) {
 
 </body>
 </html>
+
