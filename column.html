@@ -1,25 +1,17 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>チョコレートコラム | Chocolate Craft Campus</title>
 
 <style>
-
-/* =========================
-   1. 全体設定
-========================= */
-
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -28,21 +20,15 @@ body {
 
 body {
     background: #2b1a14;
-    color: #f8e5b1;
-    font-family: "Yu Mincho", "Hiragino Mincho ProN",
-                 "Noto Serif JP", serif;
 }
 
-/* =========================
-   2. 一覧画面
-========================= */
+/* 一覧画面 */
 
 .list-screen {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    overflow: hidden;
 }
 
 .list-stage {
@@ -52,90 +38,59 @@ body {
     flex-shrink: 0;
 }
 
-/* 一覧画像 */
-
-.list-stage picture {
-    position: relative;
-    z-index: 1;
+.list-stage picture,
+.list-stage img {
     display: block;
     width: 100%;
     height: 100%;
 }
 
 .list-stage img {
-    display: block;
-    width: 100%;
-    height: 100%;
     object-fit: contain;
+    pointer-events: none;
 }
 
-/* =========================
-   3. 記事のクリック領域
-   ★画像より前面に配置
-========================= */
+/* 記事のクリック領域 */
 
 .article-link {
     position: absolute;
     z-index: 10;
-
     left: 4.5%;
     top: 40%;
     width: 68%;
     height: 46%;
-
-    display: block;
-    padding: 0;
     margin: 0;
-
-    border: 0;
-    border-radius: 8px;
+    padding: 0;
+    border: 2px solid transparent;
     background: transparent;
-
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 }
 
-/* マウスを乗せたとき */
-
 .article-link:hover {
-    background: rgba(255, 225, 160, 0.04);
+    background: rgba(255, 225, 160, 0.06);
 }
-
-/* キーボード操作時 */
 
 .article-link:focus-visible {
     outline: 2px solid #e8c46e;
-    outline-offset: -3px;
 }
 
-/* =========================
-   4. ポップアップ背景
-========================= */
+/* ポップアップ */
 
 .popup {
     position: fixed;
     inset: 0;
     z-index: 1000;
-
     display: none;
     justify-content: center;
     align-items: center;
-
-    width: 100%;
-    height: 100%;
-    padding: 0;
-
-    background: rgba(20, 10, 6, 0.94);
+    background: rgba(20, 10, 6, 0.96);
     overflow: auto;
 }
 
 .popup.is-open {
     display: flex;
 }
-
-/* =========================
-   5. ポップアップ画像
-========================= */
 
 .popup-stage {
     position: relative;
@@ -144,62 +99,42 @@ body {
     flex-shrink: 0;
 }
 
-.popup-stage picture {
+.popup-stage picture,
+.popup-stage img {
     display: block;
     width: 100%;
     height: 100%;
 }
 
 .popup-stage img {
-    display: block;
-    width: 100%;
-    height: 100%;
     object-fit: contain;
+    pointer-events: none;
 }
 
-/* =========================
-   6. 閉じるボタン
-========================= */
+/* 閉じるボタン */
 
 .close-button {
     position: absolute;
     z-index: 20;
-
     top: 0;
     right: 0;
-
-    width: 7%;
-    height: 7%;
-    min-width: 36px;
-    min-height: 36px;
-
-    padding: 0;
-    border: none;
+    width: 8%;
+    height: 8%;
+    min-width: 40px;
+    min-height: 40px;
+    border: 0;
     background: transparent;
-
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
 }
 
-.close-button:focus-visible {
-    outline: 2px solid #e8c46e;
-    outline-offset: -3px;
-}
-
-/* =========================
-   7. スマートフォン表示
-========================= */
+/* スマートフォン */
 
 @media screen and (max-width: 700px) {
-
-    /* スマホ用一覧画像 */
 
     .list-stage {
         width: min(100vw, 51.7857vh);
         aspect-ratio: 928 / 1792;
     }
-
-    /* スマホ用記事クリック領域 */
 
     .article-link {
         left: 4%;
@@ -208,93 +143,49 @@ body {
         height: 42%;
     }
 
-    /* スマホ用ポップアップ画像 */
-
     .popup-stage {
         width: min(100vw, 66.6667vh);
         aspect-ratio: 2 / 3;
     }
 
     .close-button {
-        width: 9%;
+        width: 10%;
         height: 5%;
-        min-width: 32px;
-        min-height: 32px;
+        min-width: 34px;
+        min-height: 34px;
     }
-
 }
-
-/* =========================
-   8. 動きの設定
-========================= */
-
-@media (prefers-reduced-motion: no-preference) {
-
-    .popup {
-        animation: popupFadeIn 0.18s ease-out;
-    }
-
-    @keyframes popupFadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     コラム一覧画面
-========================= -->
+<!-- コラム一覧 -->
 
 <main class="list-screen">
-
     <div class="list-stage">
 
         <picture>
-
-            <!-- スマートフォン用一覧画像 -->
-
             <source
                 media="(max-width: 700px)"
-                srcset="scolumn.png"
-            >
-
-            <!-- PC用一覧画像 -->
+                srcset="scolumn.png">
 
             <img
                 src="column.png"
-                alt="Chocolate Craft Campus チョコレートコラム"
-            >
-
+                alt="Chocolate Craft Campus チョコレートコラム">
         </picture>
-
-        <!-- 記事をクリックしてポップアップを開く -->
 
         <button
             class="article-link"
+            id="articleButton"
             type="button"
-            aria-label="いま注目のカカオポリフェノールを読む"
-            aria-haspopup="dialog"
-            aria-controls="columnPopup"
-            onclick="openColumn()"
-        ></button>
+            aria-label="いま注目のカカオポリフェノールを読む">
+        </button>
 
     </div>
-
 </main>
 
-
-<!-- =========================
-     コラムのポップアップ
-========================= -->
+<!-- コラムポップアップ -->
 
 <div
     class="popup"
@@ -302,110 +193,87 @@ body {
     role="dialog"
     aria-modal="true"
     aria-label="いま注目のカカオポリフェノール"
-    aria-hidden="true"
->
+    aria-hidden="true">
 
     <div class="popup-stage">
 
         <picture>
-
-            <!-- スマートフォン用ポップアップ画像 -->
-
             <source
                 media="(max-width: 700px)"
-                srcset="scolumn001.png"
-            >
-
-            <!-- PC用ポップアップ画像 -->
+                srcset="scolumn001.png">
 
             <img
+                id="columnDetailImage"
                 src="column001.png"
-                alt="いま注目のカカオポリフェノール"
-            >
-
+                alt="いま注目のカカオポリフェノール">
         </picture>
-
-        <!-- 右上の×をクリックして閉じる -->
 
         <button
             class="close-button"
+            id="closeButton"
             type="button"
-            aria-label="コラムを閉じる"
-            onclick="closeColumn()"
-        ></button>
+            aria-label="コラムを閉じる">
+        </button>
 
     </div>
-
 </div>
 
-
 <script>
+(function () {
 
-/* =========================
-   9. ポップアップの制御
-========================= */
+    const popup = document.getElementById("columnPopup");
+    const articleButton = document.getElementById("articleButton");
+    const closeButton = document.getElementById("closeButton");
+    const detailImage = document.getElementById("columnDetailImage");
 
-const popup = document.getElementById("columnPopup");
+    /* 記事をクリックしたら開く */
 
-const articleButton = document.querySelector(".article-link");
+    articleButton.addEventListener("click", function () {
+        popup.classList.add("is-open");
+        popup.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        closeButton.focus();
+    });
 
-const closeButton = document.querySelector(".close-button");
+    /* ×をクリックしたら閉じる */
 
-
-/* ポップアップを開く */
-
-function openColumn() {
-
-    popup.classList.add("is-open");
-
-    popup.setAttribute("aria-hidden", "false");
-
-    document.body.style.overflow = "hidden";
-
-    closeButton.focus();
-
-}
-
-
-/* ポップアップを閉じる */
-
-function closeColumn() {
-
-    popup.classList.remove("is-open");
-
-    popup.setAttribute("aria-hidden", "true");
-
-    document.body.style.overflow = "";
-
-    articleButton.focus();
-
-}
-
-
-/* Escキーで閉じる */
-
-document.addEventListener("keydown", function(event) {
-
-    if (
-        event.key === "Escape" &&
-        popup.classList.contains("is-open")
-    ) {
-        closeColumn();
+    function closeColumn() {
+        popup.classList.remove("is-open");
+        popup.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        articleButton.focus();
     }
 
-});
+    closeButton.addEventListener("click", closeColumn);
 
+    /* 背景クリックで閉じる */
 
-/* ポップアップの背景をクリックして閉じる */
+    popup.addEventListener("click", function (event) {
+        if (event.target === popup) {
+            closeColumn();
+        }
+    });
 
-popup.addEventListener("click", function(event) {
+    /* Escキーで閉じる */
 
-    if (event.target === popup) {
-        closeColumn();
-    }
+    document.addEventListener("keydown", function (event) {
+        if (
+            event.key === "Escape" &&
+            popup.classList.contains("is-open")
+        ) {
+            closeColumn();
+        }
+    });
 
-});
+    /* 画像が見つからない場合は開発者ツールに記録 */
 
+    detailImage.addEventListener("error", function () {
+        console.error(
+            "コラム画像を読み込めません。column001.png のファイル名と配置を確認してください。"
+        );
+    });
+
+})();
 </script>
 
 </body>
