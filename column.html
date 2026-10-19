@@ -52,36 +52,56 @@ body {
     flex-shrink: 0;
 }
 
-.list-stage picture,
-.list-stage img {
+/* 一覧画像 */
+
+.list-stage picture {
+    position: relative;
+    z-index: 1;
     display: block;
     width: 100%;
     height: 100%;
 }
 
 .list-stage img {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
 /* =========================
-   3. メイン記事のクリック領域
-   PC用の画像に合わせた位置
+   3. 記事のクリック領域
+   ★画像より前面に配置
 ========================= */
 
 .article-link {
     position: absolute;
+    z-index: 10;
+
     left: 4.5%;
     top: 40%;
     width: 68%;
     height: 46%;
+
     display: block;
-    cursor: pointer;
-    border: 0;
-    background: transparent;
     padding: 0;
+    margin: 0;
+
+    border: 0;
     border-radius: 8px;
+    background: transparent;
+
+    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 }
+
+/* マウスを乗せたとき */
+
+.article-link:hover {
+    background: rgba(255, 225, 160, 0.04);
+}
+
+/* キーボード操作時 */
 
 .article-link:focus-visible {
     outline: 2px solid #e8c46e;
@@ -96,12 +116,17 @@ body {
     position: fixed;
     inset: 0;
     z-index: 1000;
+
     display: none;
     justify-content: center;
     align-items: center;
+
+    width: 100%;
+    height: 100%;
+    padding: 0;
+
     background: rgba(20, 10, 6, 0.94);
     overflow: auto;
-    padding: 0;
 }
 
 .popup.is-open {
@@ -117,9 +142,6 @@ body {
     width: min(100vw, 150vh);
     aspect-ratio: 3 / 2;
     flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .popup-stage picture {
@@ -137,22 +159,25 @@ body {
 
 /* =========================
    6. 閉じるボタン
-   画像右上の「×」に重ねる
 ========================= */
 
 .close-button {
     position: absolute;
+    z-index: 20;
+
     top: 0;
     right: 0;
+
     width: 7%;
     height: 7%;
     min-width: 36px;
     min-height: 36px;
+
     padding: 0;
     border: none;
     background: transparent;
+
     cursor: pointer;
-    z-index: 5;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -167,12 +192,14 @@ body {
 
 @media screen and (max-width: 700px) {
 
+    /* スマホ用一覧画像 */
+
     .list-stage {
         width: min(100vw, 51.7857vh);
         aspect-ratio: 928 / 1792;
     }
 
-    /* スマホ用一覧画像のメイン記事位置 */
+    /* スマホ用記事クリック領域 */
 
     .article-link {
         left: 4%;
@@ -198,13 +225,22 @@ body {
 }
 
 /* =========================
-   8. 動きを控えたい環境への配慮
+   8. 動きの設定
 ========================= */
 
 @media (prefers-reduced-motion: no-preference) {
 
     .popup {
-        transition: opacity 0.15s ease;
+        animation: popupFadeIn 0.18s ease-out;
+    }
+
+    @keyframes popupFadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 
 }
@@ -223,23 +259,24 @@ body {
     <div class="list-stage">
 
         <picture>
+
             <!-- スマートフォン用一覧画像 -->
+
             <source
                 media="(max-width: 700px)"
                 srcset="scolumn.png"
             >
 
             <!-- PC用一覧画像 -->
+
             <img
                 src="column.png"
                 alt="Chocolate Craft Campus チョコレートコラム"
             >
+
         </picture>
 
-        <!--
-          メイン記事のクリック領域。
-          クリックするとポップアップを表示します。
-        -->
+        <!-- 記事をクリックしてポップアップを開く -->
 
         <button
             class="article-link"
@@ -253,6 +290,7 @@ body {
     </div>
 
 </main>
+
 
 <!-- =========================
      コラムのポップアップ
@@ -270,20 +308,25 @@ body {
     <div class="popup-stage">
 
         <picture>
+
             <!-- スマートフォン用ポップアップ画像 -->
+
             <source
                 media="(max-width: 700px)"
                 srcset="scolumn001.png"
             >
 
             <!-- PC用ポップアップ画像 -->
+
             <img
                 src="column001.png"
-                alt="いま注目のカカオポリフェノール。血管の健康やストレスとの付き合い方について紹介するコラム"
+                alt="いま注目のカカオポリフェノール"
             >
+
         </picture>
 
-        <!-- 閉じるボタン -->
+        <!-- 右上の×をクリックして閉じる -->
+
         <button
             class="close-button"
             type="button"
@@ -295,19 +338,26 @@ body {
 
 </div>
 
+
 <script>
 
 /* =========================
-   ポップアップを開く
+   9. ポップアップの制御
 ========================= */
 
 const popup = document.getElementById("columnPopup");
+
 const articleButton = document.querySelector(".article-link");
+
 const closeButton = document.querySelector(".close-button");
+
+
+/* ポップアップを開く */
 
 function openColumn() {
 
     popup.classList.add("is-open");
+
     popup.setAttribute("aria-hidden", "false");
 
     document.body.style.overflow = "hidden";
@@ -316,13 +366,13 @@ function openColumn() {
 
 }
 
-/* =========================
-   ポップアップを閉じる
-========================= */
+
+/* ポップアップを閉じる */
 
 function closeColumn() {
 
     popup.classList.remove("is-open");
+
     popup.setAttribute("aria-hidden", "true");
 
     document.body.style.overflow = "";
@@ -331,9 +381,8 @@ function closeColumn() {
 
 }
 
-/* =========================
-   Escキーで閉じる
-========================= */
+
+/* Escキーで閉じる */
 
 document.addEventListener("keydown", function(event) {
 
@@ -346,9 +395,8 @@ document.addEventListener("keydown", function(event) {
 
 });
 
-/* =========================
-   背景部分をクリックして閉じる
-========================= */
+
+/* ポップアップの背景をクリックして閉じる */
 
 popup.addEventListener("click", function(event) {
 
@@ -362,3 +410,4 @@ popup.addEventListener("click", function(event) {
 
 </body>
 </html>
+
