@@ -325,12 +325,12 @@ body {
 
     <!-- チョコレートコラム -->
 
-    <a
-        href="#"
-        class="category-link column-link"
-        id="columnLink"
-        aria-label="チョコレートコラム">
-    </a>
+<a
+    href="column.html"
+    class="category-link column-link"
+    aria-label="チョコレートコラム">
+</a>
+
 
 </div>
 
@@ -429,9 +429,6 @@ const worldLink =
 const historyLink =
     document.getElementById("historyLink");
 
-const columnLink =
-    document.getElementById("columnLink");
-
 
 /* =========================
    TOP画像をクリックすると扉が開く
@@ -499,18 +496,6 @@ historyLink.addEventListener("click", function(event) {
 
 });
 
-
-/* =========================
-   チョコレートコラム
-========================= */
-
-columnLink.addEventListener("click", function(event) {
-
-    event.preventDefault();
-
-    showDetailScreen(columnScreen);
-
-});
 
 </script>
 
