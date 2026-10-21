@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -22,7 +22,9 @@ body {
     background: #2b1a14;
 }
 
-/* 一覧画面 */
+/* =========================
+   コラム一覧画面
+========================= */
 
 .list-screen {
     min-height: 100vh;
@@ -38,14 +40,10 @@ body {
     flex-shrink: 0;
 }
 
-.list-stage picture,
 .list-stage img {
     display: block;
     width: 100%;
     height: 100%;
-}
-
-.list-stage img {
     object-fit: contain;
     pointer-events: none;
 }
@@ -62,6 +60,7 @@ body {
     margin: 0;
     padding: 0;
     border: 2px solid transparent;
+    border-radius: 8px;
     background: transparent;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -73,17 +72,23 @@ body {
 
 .article-link:focus-visible {
     outline: 2px solid #e8c46e;
+    outline-offset: 2px;
 }
 
-/* ポップアップ */
+/* =========================
+   ポップアップ画面
+========================= */
 
 .popup {
     position: fixed;
     inset: 0;
     z-index: 1000;
+
     display: none;
     justify-content: center;
     align-items: center;
+
+    padding: 0;
     background: rgba(20, 10, 6, 0.96);
     overflow: auto;
 }
@@ -99,16 +104,35 @@ body {
     flex-shrink: 0;
 }
 
-.popup-stage picture,
-.popup-stage img {
+/* 記事画像 */
+
+.popup-image {
     display: block;
     width: 100%;
     height: 100%;
-}
-
-.popup-stage img {
     object-fit: contain;
     pointer-events: none;
+}
+
+/* 画像が読み込めない場合の表示 */
+
+.popup-error {
+    position: absolute;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    color: #fff0d0;
+    background: #2b1a14;
+    border: 2px solid #d6ad56;
+    text-align: center;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.popup-error.is-visible {
+    display: flex;
 }
 
 /* 閉じるボタン */
@@ -125,9 +149,16 @@ body {
     border: 0;
     background: transparent;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* スマートフォン */
+.close-button:focus-visible {
+    outline: 2px solid #e8c46e;
+}
+
+/* =========================
+   スマートフォン
+========================= */
 
 @media screen and (max-width: 700px) {
 
@@ -160,7 +191,9 @@ body {
 
 <body>
 
-<!-- コラム一覧 -->
+<!-- =========================
+     コラム一覧
+========================= -->
 
 <main class="list-screen">
     <div class="list-stage">
@@ -168,10 +201,10 @@ body {
         <picture>
             <source
                 media="(max-width: 700px)"
-                srcset="scolumn.png">
+                srcset="./scolumn.png">
 
             <img
-                src="column.png"
+                src="./column.png"
                 alt="Chocolate Craft Campus チョコレートコラム">
         </picture>
 
@@ -185,7 +218,10 @@ body {
     </div>
 </main>
 
-<!-- コラムポップアップ -->
+
+<!-- =========================
+     コラム記事ポップアップ
+========================= -->
 
 <div
     class="popup"
@@ -197,16 +233,23 @@ body {
 
     <div class="popup-stage">
 
-        <picture>
-            <source
-                media="(max-width: 700px)"
-                srcset="scolumn001.png">
+        <!-- PC・スマホの画像をJavaScriptで切り替え -->
 
-            <img
-                id="columnDetailImage"
-                src="column001.png"
-                alt="いま注目のカカオポリフェノール">
-        </picture>
+        <img
+            class="popup-image"
+            id="columnDetailImage"
+            src=""
+            alt="いま注目のカカオポリフェノール">
+
+        <!-- 画像が見つからない場合の案内 -->
+
+        <div
+            class="popup-error"
+            id="popupError"
+            role="status">
+        </div>
+
+        <!-- 閉じるボタン -->
 
         <button
             class="close-button"
@@ -218,64 +261,169 @@ body {
     </div>
 </div>
 
+
 <script>
 (function () {
+
+    "use strict";
 
     const popup = document.getElementById("columnPopup");
     const articleButton = document.getElementById("articleButton");
     const closeButton = document.getElementById("closeButton");
     const detailImage = document.getElementById("columnDetailImage");
+    const popupError = document.getElementById("popupError");
 
-    /* 記事をクリックしたら開く */
+    let previousFocus = null;
 
-    articleButton.addEventListener("click", function () {
+    /*
+       画面サイズに合わせて記事画像を選択
+       PC：column001.png
+       スマホ：scolumn001.png
+    */
+
+    function setArticleImage() {
+
+        const isMobile = window.matchMedia(
+            "(max-width: 700px)"
+        ).matches;
+
+        const imagePath = isMobile
+            ? "./scolumn001.png"
+            : "./column001.png";
+
+        popupError.classList.remove("is-visible");
+        popupError.textContent = "";
+
+        detailImage.style.display = "block";
+
+        /*
+           いったん画像を解除してから読み込み直す
+        */
+
+        detailImage.onload = null;
+        detailImage.onerror = null;
+        detailImage.removeAttribute("src");
+
+        detailImage.onload = function () {
+            popupError.classList.remove("is-visible");
+            detailImage.style.display = "block";
+        };
+
+        detailImage.onerror = function () {
+
+            detailImage.style.display = "none";
+
+            popupError.textContent =
+                "記事画像を読み込めませんでした。\n\n" +
+                "確認するファイル名：\n" +
+                imagePath +
+                "\n\n" +
+                "GitHub上のファイル名と保存場所を確認してください。";
+
+            popupError.style.whiteSpace = "pre-line";
+            popupError.classList.add("is-visible");
+
+            console.error(
+                "コラム画像の読み込みに失敗しました:",
+                imagePath
+            );
+        };
+
+        detailImage.src = imagePath;
+    }
+
+
+    /* =========================
+       記事をクリックして開く
+    ========================= */
+
+    function openColumn() {
+
+        previousFocus = document.activeElement;
+
+        /*
+           画像の読み込みとポップアップ表示を
+           別々に処理する
+        */
+
         popup.classList.add("is-open");
         popup.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
+
+        setArticleImage();
+
         closeButton.focus();
-    });
-
-    /* ×をクリックしたら閉じる */
-
-    function closeColumn() {
-        popup.classList.remove("is-open");
-        popup.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
-        articleButton.focus();
     }
 
-    closeButton.addEventListener("click", closeColumn);
+    articleButton.addEventListener(
+        "click",
+        openColumn
+    );
 
-    /* 背景クリックで閉じる */
+
+    /* =========================
+       ポップアップを閉じる
+    ========================= */
+
+    function closeColumn() {
+
+        popup.classList.remove("is-open");
+        popup.setAttribute("aria-hidden", "true");
+
+        document.body.style.overflow = "";
+
+        if (previousFocus) {
+            previousFocus.focus();
+        } else {
+            articleButton.focus();
+        }
+    }
+
+    closeButton.addEventListener(
+        "click",
+        closeColumn
+    );
+
+
+    /* 背景をクリックして閉じる */
 
     popup.addEventListener("click", function (event) {
+
         if (event.target === popup) {
             closeColumn();
         }
+
     });
+
 
     /* Escキーで閉じる */
 
     document.addEventListener("keydown", function (event) {
+
         if (
             event.key === "Escape" &&
             popup.classList.contains("is-open")
         ) {
             closeColumn();
         }
+
     });
 
-    /* 画像が見つからない場合は開発者ツールに記録 */
 
-    detailImage.addEventListener("error", function () {
-        console.error(
-            "コラム画像を読み込めません。column001.png のファイル名と配置を確認してください。"
-        );
-    });
+    /* 画像を読み込み中に画面幅が変わった場合も対応 */
+
+    window.matchMedia("(max-width: 700px)")
+        .addEventListener("change", function () {
+
+            if (popup.classList.contains("is-open")) {
+                setArticleImage();
+            }
+
+        });
 
 })();
 </script>
 
 </body>
 </html>
-
+```
