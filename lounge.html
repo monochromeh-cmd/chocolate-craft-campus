@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Lounge | Chocolate Craft Campus</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #2b1a14;
+  color: #f5e8d8;
+  font-family: "Yu Gothic", "Meiryo", sans-serif;
+  line-height: 1.9;
+}
+
+a {
+  color: #d7b78c;
+}
+
+header {
+  text-align: center;
+  padding: 65px 20px 45px;
+  border-bottom: 1px solid #624735;
+}
+
+.eyebrow {
+  color: #d7b78c;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: normal;
+  margin: 10px 0;
+}
+
+header p {
+  color: #d9c5b2;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+section {
+  padding: 38px 0;
+  border-bottom: 1px solid #624735;
+}
+
+h2 {
+  font-size: 23px;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+.lead {
+  color: #d9c5b2;
+  font-size: 14px;
+}
+
+.panel {
+  background: #39251c;
+  border: 1px solid #624735;
+  border-radius: 10px;
+  padding: 24px;
+  margin-top: 22px;
+}
+
+label {
+  display: block;
+  margin: 16px 0 5px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #a18a76;
+  border-radius: 5px;
+  background: #f8f3ed;
+  color: #2b1a14;
+  font: inherit;
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 26px;
+  background: #d7b78c;
+  color: #2b1a14;
+  border: none;
+  border-radius: 4px;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.note {
+  font-size: 12px;
+  color: #d9c5b2;
+}
+
+.post {
+  padding: 18px 0;
+  border-bottom: 1px solid #624735;
+}
+
+.post:last-child {
+  border-bottom: none;
+}
+
+.post h3 {
+  margin-bottom: 4px;
+  font-size: 17px;
+}
+
+.post p {
+  margin-top: 5px;
+}
+
+.suzuri {
+  text-align: center;
+  padding: 30px 20px;
+  background: #39251c;
+  border: 1px solid #624735;
+  border-radius: 10px;
+  margin-top: 22px;
+}
+
+.suzuri img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 6px;
+}
+
+.shop-link {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 24px;
+  border: 1px solid #d7b78c;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  padding: 35px 15px;
+  color: #bca795;
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding-top: 45px;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  section {
+    padding: 28px 0;
+  }
+
+  .panel {
+    padding: 17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="eyebrow">CHOCOLATE CRAFT CAMPUS</div>
+  <h1>Chocolate Lounge</h1>
+  <p>知る、見つける、つながる。</p>
+  <p>チョコレートを愛する人たちの交流スペース</p>
+</header>
+
+<main>
+
+  <!-- 01 メッセージ投稿 -->
+  <section>
+    <h2>01　メッセージを届ける</h2>
+    <p class="lead">
+      チョコレートへの思い、お気に入りの一品、
+      このサイトへの感想などをお寄せください。
+    </p>
+
+    <!-- Formspreeの設定後、actionを書き換えてください -->
+    <div class="panel">
+      <form
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST">
+
+        <input type="hidden"
+               name="_subject"
+               value="CCC チョコレートラウンジ投稿">
+
+        <label for="nickname">ニックネーム（必須）</label>
+        <input id="nickname"
+               name="nickname"
+               type="text"
+               maxlength="40"
+               required>
+
+        <label for="category">投稿の種類</label>
+        <select id="category" name="category" required>
+          <option value="メッセージ">メッセージ・感想</option>
+          <option value="店舗情報">チョコレートショップ情報</option>
+        </select>
+
+        <label for="shop">店舗名（店舗情報の場合）</label>
+        <input id="shop"
+               name="shop"
+               type="text"
+               maxlength="120">
+
+        <label for="prefecture">都道府県（店舗情報の場合）</label>
+        <input id="prefecture"
+               name="prefecture"
+               type="text"
+               maxlength="30">
+
+        <label for="shopurl">店舗の公式サイト（任意）</label>
+        <input id="shopurl"
+               name="shop_url"
+               type="url"
+               maxlength="500"
+               placeholder="https://...">
+
+        <label for="message">メッセージ・おすすめポイント（必須）</label>
+        <textarea id="message"
+                  name="message"
+                  maxlength="2000"
+                  required></textarea>
+
+        <p class="note">
+          投稿は管理者が内容を確認し、承認したもののみ
+          サイトに掲載します。送信しただけでは公開されません。
+        </p>
+
+        <label>
+          <input type="checkbox"
+                 name="publication_consent"
+                 value="同意"
+                 required
+                 style="width:auto;">
+          投稿内容が承認後に公開されることに同意します。
+        </label>
+
+        <button type="submit">投稿を送る</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 02 承認済み投稿 -->
+  <section>
+    <h2>02　ラウンジからのメッセージ</h2>
+    <p class="lead">
+      チョコレート好きの皆さんから届いた声をご紹介します。
+    </p>
+
+    <div class="panel">
+
+      <!-- 承認した投稿だけを、以下の形式で追加 -->
+
+      <article class="post">
+        <h3>ラウンジへようこそ</h3>
+        <p>
+          皆さんのおすすめのチョコレートやお店の情報を、
+          ぜひお聞かせください。
+        </p>
+        <p class="note">Chocolate Craft Campus 管理者</p>
+      </article>
+
+      <!--
+      掲載例：
+
+      <article class="post">
+        <h3>ニックネーム</h3>
+        <p>承認したメッセージ</p>
+        <p>店舗名・都道府県など</p>
+        <p><a href="公式サイトURL"
+              target="_blank"
+              rel="noopener noreferrer">店舗公式サイト</a></p>
+      </article>
+      -->
+
+    </div>
+  </section>
+
+  <!-- 03 SUZURI -->
+  <section>
+    <h2>03　ひろさんの創作ギャラリー</h2>
+    <p class="lead">
+      チョコレートの世界から、イラストと言葉の世界へ。
+    </p>
+
+    <div class="suzuri">
+      <h3>monochromeH2</h3>
+
+      <p>
+        イラストと詩、言葉から生まれる作品たち。
+        ひとつひとつの作品との出会いをお楽しみください。
+      </p>
+
+      <!-- 実際の作品画像を用意したら表示できます -->
+      <!--
+      <img src="images/suzuri-work.jpg"
+           alt="monochromeH2の作品">
+      -->
+
+      <a class="shop-link"
+         href="https://suzuri.jp/monochromeH2"
+         target="_blank"
+         rel="noopener noreferrer">
+        SUZURIショップを見る ↗
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Chocolate Craft Campus<br>
+  知る、見つける、つながる。奥深きチョコレートの世界へ。
+</footer>
+
+</body>
+</html>
