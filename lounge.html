@@ -1,186 +1,789 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Chocolate Lounge | Chocolate Craft Campus</title>
 
 <style>
+/* =========================
+   1. 基本設定
+========================= */
+
 * {
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #1b0e07;
+  --panel: rgba(15, 8, 4, 0.78);
+  --gold: #d9b779;
+  --gold-light: #f4d8a7;
+  --text: #f5e9d9;
+  --muted: #d8c5ae;
+  --line: #987344;
+  --brown: #482316;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background: #2b1a14;
-  color: #f5e8d8;
-  font-family: "Yu Gothic", "Meiryo", sans-serif;
-  line-height: 1.9;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 50% 20%, #32190b 0%, transparent 55%),
+    var(--bg);
+  font-family:
+    "Yu Mincho", "Hiragino Mincho ProN",
+    "Noto Serif JP", "Meiryo", serif;
+  line-height: 1.7;
+}
+
+img {
+  max-width: 100%;
 }
 
 a {
-  color: #d7b78c;
+  color: var(--gold-light);
 }
 
-header {
-  text-align: center;
-  padding: 65px 20px 45px;
-  border-bottom: 1px solid #624735;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
-.eyebrow {
-  color: #d7b78c;
-  letter-spacing: 3px;
-  font-size: 12px;
+
+/* =========================
+   2. ヘッダー画像
+   PC：lounge.png
+   スマホ：slounge.png
+========================= */
+
+.site-header {
+  width: 100%;
+  line-height: 0;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
 }
 
-h1 {
-  font-family: Georgia, serif;
-  font-size: clamp(32px, 6vw, 54px);
-  font-weight: normal;
-  margin: 10px 0;
+.site-header picture,
+.site-header img {
+  display: block;
+  width: 100%;
 }
 
-header p {
-  color: #d9c5b2;
+.site-header img {
+  height: auto;
 }
 
-main {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
 
-section {
-  padding: 38px 0;
-  border-bottom: 1px solid #624735;
-}
+/* =========================
+   3. メインレイアウト
+========================= */
 
-h2 {
-  font-size: 23px;
-  font-weight: normal;
-  margin-bottom: 8px;
-}
-
-.lead {
-  color: #d9c5b2;
-  font-size: 14px;
+.main-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(340px, 1fr);
+  gap: 18px;
+  width: min(1500px, 96%);
+  margin: 12px auto 0;
+  align-items: stretch;
 }
 
 .panel {
-  background: #39251c;
-  border: 1px solid #624735;
-  border-radius: 10px;
-  padding: 24px;
-  margin-top: 22px;
-}
-
-label {
-  display: block;
-  margin: 16px 0 5px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #a18a76;
+  min-width: 0;
+  padding: 16px 18px;
+  background: var(--panel);
+  border: 1px solid var(--gold);
   border-radius: 5px;
-  background: #f8f3ed;
-  color: #2b1a14;
-  font: inherit;
+  box-shadow:
+    inset 0 0 0 2px rgba(217, 183, 121, 0.07),
+    0 4px 18px rgba(0, 0, 0, 0.18);
 }
 
-textarea {
-  min-height: 130px;
-  resize: vertical;
+
+/* =========================
+   4. メッセージ一覧
+========================= */
+
+.message-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 12px;
 }
 
-button {
-  margin-top: 20px;
-  padding: 12px 26px;
-  background: #d7b78c;
-  color: #2b1a14;
-  border: none;
-  border-radius: 4px;
-  font: inherit;
-  cursor: pointer;
+.heading-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-light);
+  font-size: 27px;
 }
 
-button:hover {
-  opacity: 0.85;
+.message-heading h2 {
+  margin: 0;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: normal;
 }
 
-.note {
-  font-size: 12px;
-  color: #d9c5b2;
+.message-heading p {
+  margin: 1px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
-.post {
-  padding: 18px 0;
-  border-bottom: 1px solid #624735;
+.message-list {
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.13);
 }
 
-.post:last-child {
+.message-item {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 125px;
+  gap: 14px;
+  align-items: start;
+  padding: 15px 0 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.message-item:last-child {
   border-bottom: none;
 }
 
-.post h3 {
-  margin-bottom: 4px;
-  font-size: 17px;
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-top: 2px;
+  overflow: hidden;
+  border: 1px solid #e6c69b;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff0d9, #c69a6b);
+  color: #633c24;
+  font-family: sans-serif;
+  font-size: 25px;
 }
 
-.post p {
-  margin-top: 5px;
+.message-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-.suzuri {
-  text-align: center;
-  padding: 30px 20px;
-  background: #39251c;
-  border: 1px solid #624735;
-  border-radius: 10px;
-  margin-top: 22px;
+.message-name {
+  margin: 0 0 3px;
+  color: #fff5e8;
+  font-size: 15px;
+  font-weight: bold;
 }
 
-.suzuri img {
+.message-text {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.message-meta {
+  text-align: right;
+  font-size: 12px;
+  color: #e0d1c0;
+}
+
+.message-date {
   display: block;
+  white-space: nowrap;
+}
+
+.comment-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--gold-light);
+  font-size: 14px;
+}
+
+.comment-icon {
+  font-size: 19px;
+  line-height: 1;
+}
+
+
+/* =========================
+   5. 共通ボタン
+========================= */
+
+.design-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
   width: 100%;
-  max-width: 420px;
-  height: auto;
-  margin: 20px auto;
-  border-radius: 6px;
-}
-
-.shop-link {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 10px 24px;
-  border: 1px solid #d7b78c;
-  text-decoration: none;
-}
-
-footer {
+  min-height: 60px;
+  padding: 12px 18px;
+  border: 2px solid #b47a57;
+  outline: 1px solid rgba(244, 216, 167, 0.35);
+  outline-offset: -6px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #572b19, #321609);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 228, 187, 0.25),
+    0 3px 10px rgba(0, 0, 0, 0.3);
+  color: var(--gold-light);
   text-align: center;
-  padding: 35px 15px;
-  color: #bca795;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.2s, background 0.2s;
+}
+
+.design-button:hover {
+  filter: brightness(1.2);
+}
+
+.button-icon {
+  font-size: 24px;
+}
+
+.button-label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.button-arrow {
+  margin-left: auto;
+  font-size: 25px;
+  font-weight: normal;
+}
+
+.post-button {
+  margin: 14px 0 0;
+}
+
+
+/* =========================
+   6. 運営者プロフィール
+========================= */
+
+.profile-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 3px 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.profile-heading small {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.profile-heading h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.4;
+}
+
+.profile-table {
+  display: grid;
+  grid-template-columns: 115px minmax(0, 1fr);
+  gap: 12px 10px;
+  font-size: 13px;
+}
+
+.profile-label {
+  color: var(--gold-light);
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.profile-value {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 19px;
+}
+
+.profile-caption {
+  margin: 0;
   font-size: 12px;
 }
 
+.award-list {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 2px 10px;
+}
+
+.award-year {
+  font-size: 14px;
+}
+
+.profile-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.profile-list li {
+  margin-bottom: 2px;
+  line-height: 1.55;
+}
+
+.profile-gap {
+  margin-top: 2px;
+}
+
+.greeting-box {
+  margin-top: 15px;
+  padding: 10px 16px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+}
+
+.greeting-box h3 {
+  margin: 0 0 4px;
+  color: var(--gold-light);
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.greeting-box p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+
+/* =========================
+   7. SUZURIショップ
+========================= */
+
+.shop-button {
+  margin-top: auto;
+  min-height: 72px;
+  padding: 10px 15px;
+}
+
+.shop-button .button-label {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.55;
+}
+
+.shop-button .button-label small {
+  display: block;
+  font-size: 13px;
+}
+
+.shop-button .button-arrow {
+  flex-shrink: 0;
+}
+
+.profile-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-area {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+
+/* =========================
+   8. フッター
+========================= */
+
+.site-footer {
+  max-width: 760px;
+  margin: 32px auto 0;
+  padding: 12px 20px 30px;
+  text-align: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--gold-light);
+  font-size: 16px;
+}
+
+.footer-brand::before,
+.footer-brand::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.footer-brand img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.site-footer p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+
+/* =========================
+   9. 投稿フォームのポップアップ
+========================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.82);
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 25px;
+  border: 1px solid var(--gold);
+  border-radius: 5px;
+  background: #211208;
+  box-shadow: 0 10px 35px #000;
+}
+
+.modal-content h2 {
+  margin: 0;
+  color: var(--gold-light);
+  font-size: 23px;
+  font-weight: normal;
+}
+
+.modal-intro {
+  margin: 8px 0 15px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 13px;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--gold-light);
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.form-label {
+  display: block;
+  margin: 13px 0 5px;
+  font-size: 14px;
+  color: var(--gold-light);
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #a78a69;
+  border-radius: 3px;
+  background: #f8f1e8;
+  color: #29180e;
+  font-size: 15px;
+}
+
+textarea.form-control {
+  min-height: 115px;
+  resize: vertical;
+}
+
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 12px;
+}
+
+.consent-label input {
+  margin-top: 6px;
+}
+
+.form-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 15px;
+  min-height: 48px;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  background: linear-gradient(180deg, #d7b779, #a77a42);
+  color: #241308;
+  cursor: pointer;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* =========================
+   10. タブレット・スマホ
+========================= */
+
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: minmax(0, 1fr);
+    width: 94%;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .profile-panel {
+    display: flex;
+  }
+
+  .profile-table {
+    grid-template-columns: 105px minmax(0, 1fr);
+  }
+
+  .shop-area {
+    padding-top: 18px;
+  }
+
+  .site-footer {
+    margin-top: 22px;
+  }
+}
+
 @media (max-width: 600px) {
-  header {
-    padding-top: 45px;
-  }
-
-  main {
-    padding: 15px;
-  }
-
-  section {
-    padding: 28px 0;
+  .main-layout {
+    width: 94%;
+    gap: 13px;
   }
 
   .panel {
-    padding: 17px;
+    padding: 13px 11px;
+  }
+
+  .message-heading {
+    gap: 10px;
+  }
+
+  .heading-icon {
+    flex-basis: 43px;
+    width: 43px;
+    height: 43px;
+    font-size: 22px;
+  }
+
+  .message-heading h2 {
+    font-size: 19px;
+  }
+
+  .message-heading p {
+    font-size: 11px;
+  }
+
+  .message-list {
+    padding: 0 9px;
+  }
+
+  .message-item {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 9px;
+    padding: 12px 0;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .message-name {
+    font-size: 14px;
+  }
+
+  .message-text {
+    font-size: 12px;
+  }
+
+  .message-meta {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .comment-count {
+    margin-top: 0;
+    font-size: 12px;
+  }
+
+  .comment-icon {
+    font-size: 16px;
+  }
+
+  .design-button {
+    min-height: 54px;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .button-label {
+    font-size: 15px;
+  }
+
+  .button-icon {
+    font-size: 21px;
+  }
+
+  .button-arrow {
+    font-size: 21px;
+  }
+
+  .profile-heading {
+    gap: 9px;
+  }
+
+  .profile-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile-heading small {
+    font-size: 12px;
+  }
+
+  .profile-heading h2 {
+    font-size: 18px;
+  }
+
+  .profile-table {
+    grid-template-columns: 83px minmax(0, 1fr);
+    gap: 10px 7px;
+    font-size: 12px;
+  }
+
+  .profile-label {
+    font-size: 13px;
+  }
+
+  .profile-name {
+    font-size: 17px;
+  }
+
+  .profile-caption {
+    font-size: 11px;
+  }
+
+  .award-list {
+    grid-template-columns: 35px minmax(0, 1fr);
+    gap: 2px 6px;
+  }
+
+  .award-year {
+    font-size: 12px;
+  }
+
+  .greeting-box {
+    padding: 10px 12px;
+  }
+
+  .greeting-box p {
+    font-size: 12px;
+  }
+
+  .shop-button .button-label {
+    font-size: 14px;
+  }
+
+  .shop-button .button-label small {
+    font-size: 11px;
+  }
+
+  .site-footer {
+    padding-bottom: 22px;
+  }
+
+  .footer-brand {
+    gap: 7px;
+    font-size: 13px;
+  }
+
+  .footer-brand img {
+    width: 23px;
+    height: 23px;
+  }
+
+  .site-footer p {
+    font-size: 10px;
+  }
+
+  .modal {
+    padding: 10px;
+  }
+
+  .modal-content {
+    padding: 20px 15px;
+  }
+
+  .modal-content h2 {
+    padding-right: 25px;
+    font-size: 20px;
   }
 }
 </style>
@@ -188,162 +791,513 @@ footer {
 
 <body>
 
-<header>
-  <div class="eyebrow">CHOCOLATE CRAFT CAMPUS</div>
-  <h1>Chocolate Lounge</h1>
-  <p>知る、見つける、つながる。</p>
-  <p>チョコレートを愛する人たちの交流スペース</p>
+<!-- =========================
+     ヘッダー画像
+     PC：lounge.png
+     スマホ：slounge.png
+========================= -->
+
+<header class="site-header">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="slounge.png">
+
+    <img
+      src="lounge.png"
+      alt="Chocolate Craft Campus Chocolate Lounge">
+  </picture>
 </header>
 
-<main>
 
-  <!-- 01 メッセージ投稿 -->
-  <section>
-    <h2>01　メッセージを届ける</h2>
-    <p class="lead">
-      チョコレートへの思い、お気に入りの一品、
-      このサイトへの感想などをお寄せください。
-    </p>
+<main class="main-layout">
 
-    <!-- Formspreeの設定後、actionを書き換えてください -->
-    <div class="panel">
-      <form
-        action="https://formspree.io/f/YOUR_FORM_ID"
-        method="POST">
+  <!-- =========================
+       左カラム：メッセージ一覧
+  ========================= -->
 
-        <input type="hidden"
-               name="_subject"
-               value="CCC チョコレートラウンジ投稿">
+  <section class="panel message-panel">
 
-        <label for="nickname">ニックネーム（必須）</label>
-        <input id="nickname"
-               name="nickname"
-               type="text"
-               maxlength="40"
-               required>
+    <div class="message-heading">
+      <div class="heading-icon" aria-hidden="true">●●●</div>
 
-        <label for="category">投稿の種類</label>
-        <select id="category" name="category" required>
-          <option value="メッセージ">メッセージ・感想</option>
-          <option value="店舗情報">チョコレートショップ情報</option>
-        </select>
-
-        <label for="shop">店舗名（店舗情報の場合）</label>
-        <input id="shop"
-               name="shop"
-               type="text"
-               maxlength="120">
-
-        <label for="prefecture">都道府県（店舗情報の場合）</label>
-        <input id="prefecture"
-               name="prefecture"
-               type="text"
-               maxlength="30">
-
-        <label for="shopurl">店舗の公式サイト（任意）</label>
-        <input id="shopurl"
-               name="shop_url"
-               type="url"
-               maxlength="500"
-               placeholder="https://...">
-
-        <label for="message">メッセージ・おすすめポイント（必須）</label>
-        <textarea id="message"
-                  name="message"
-                  maxlength="2000"
-                  required></textarea>
-
-        <p class="note">
-          投稿は管理者が内容を確認し、承認したもののみ
-          サイトに掲載します。送信しただけでは公開されません。
-        </p>
-
-        <label>
-          <input type="checkbox"
-                 name="publication_consent"
-                 value="同意"
-                 required
-                 style="width:auto;">
-          投稿内容が承認後に公開されることに同意します。
-        </label>
-
-        <button type="submit">投稿を送る</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- 02 承認済み投稿 -->
-  <section>
-    <h2>02　ラウンジからのメッセージ</h2>
-    <p class="lead">
-      チョコレート好きの皆さんから届いた声をご紹介します。
-    </p>
-
-    <div class="panel">
-
-      <!-- 承認した投稿だけを、以下の形式で追加 -->
-
-      <article class="post">
-        <h3>ラウンジへようこそ</h3>
+      <div>
+        <h2>メッセージ一覧</h2>
         <p>
-          皆さんのおすすめのチョコレートやお店の情報を、
-          ぜひお聞かせください。
+          チョコレートへの想いや、お気に入りの一品、
+          このサイトへの感想などをお寄せください。
         </p>
-        <p class="note">Chocolate Craft Campus 管理者</p>
+      </div>
+    </div>
+
+
+    <div class="message-list">
+
+      <!-- 以下はレイアウト確認用のサンプルです -->
+
+      <article class="message-item">
+        <div class="avatar" aria-hidden="true">👤</div>
+
+        <div class="message-content">
+          <h3 class="message-name">ショコラ好き</h3>
+          <p class="message-text">はじめまして。サイトを拝見して、チョコレートの奥深さにとても感動しました。
+これからも楽しみにしています！</p>
+        </div>
+
+        <div class="message-meta">
+          <time class="message-date" datetime="2026-10-26T18:45">
+            2026/10/26　18:45
+          </time>
+          <span class="comment-count">
+            <span class="comment-icon" aria-hidden="true">▱</span> 1
+          </span>
+        </div>
       </article>
 
-      <!--
-      掲載例：
 
-      <article class="post">
-        <h3>ニックネーム</h3>
-        <p>承認したメッセージ</p>
-        <p>店舗名・都道府県など</p>
-        <p><a href="公式サイトURL"
-              target="_blank"
-              rel="noopener noreferrer">店舗公式サイト</a></p>
+      <article class="message-item">
+        <div class="avatar" aria-hidden="true">👤</div>
+
+        <div class="message-content">
+          <h3 class="message-name">カカオの旅人</h3>
+          <p class="message-text">カカオポリフェノールのコラム、参考になりました。
+健康にも良いなんて、もっとチョコレートを楽しみたくなりました。</p>
+        </div>
+
+        <div class="message-meta">
+          <time class="message-date" datetime="2026-10-25T21:32">
+            2026/10/25　21:32
+          </time>
+          <span class="comment-count">
+            <span class="comment-icon" aria-hidden="true">▱</span> 2
+          </span>
+        </div>
       </article>
-      -->
+
+
+      <article class="message-item">
+        <div class="avatar" aria-hidden="true">👤</div>
+
+        <div class="message-content">
+          <h3 class="message-name">チョコレート大好き</h3>
+          <p class="message-text">「deku」とても素敵な作品ですね。心があたたかくなりました。
+また新しい作品を楽しみにしています。</p>
+        </div>
+
+        <div class="message-meta">
+          <time class="message-date" datetime="2026-10-24T12:17">
+            2026/10/24　12:17
+          </time>
+          <span class="comment-count">
+            <span class="comment-icon" aria-hidden="true">▱</span> 1
+          </span>
+        </div>
+      </article>
+
+
+      <article class="message-item">
+        <div class="avatar" aria-hidden="true">👤</div>
+
+        <div class="message-content">
+          <h3 class="message-name">スイーツ日和</h3>
+          <p class="message-text">全国のチョコレートショップの情報がうれしいです。
+実際に行ってみたくなりました！</p>
+        </div>
+
+        <div class="message-meta">
+          <time class="message-date" datetime="2026-10-22T09:36">
+            2026/10/22　09:36
+          </time>
+          <span class="comment-count">
+            <span class="comment-icon" aria-hidden="true">▱</span> 0
+          </span>
+        </div>
+      </article>
+
+
+      <article class="message-item">
+        <div class="avatar" aria-hidden="true">👤</div>
+
+        <div class="message-content">
+          <h3 class="message-name">まる</h3>
+          <p class="message-text">チョコレートの歴史、知らないことがたくさんで、とても興味深かったです。
+これからもいろいろな情報を発信してください。</p>
+        </div>
+
+        <div class="message-meta">
+          <time class="message-date" datetime="2026-10-20T20:11">
+            2026/10/20　20:11
+          </time>
+          <span class="comment-count">
+            <span class="comment-icon" aria-hidden="true">▱</span> 3
+          </span>
+        </div>
+      </article>
+
+
+      <article class="message-item">
+        <div class="avatar" aria-hidden="true">👤</div>
+
+        <div class="message-content">
+          <h3 class="message-name">choco_love</h3>
+          <p class="message-text">SUZURIの作品、どれも素敵で迷ってしまいます！
+これからも応援しています。</p>
+        </div>
+
+        <div class="message-meta">
+          <time class="message-date" datetime="2026-10-18T16:52">
+            2026/10/18　16:52
+          </time>
+          <span class="comment-count">
+            <span class="comment-icon" aria-hidden="true">▱</span> 1
+          </span>
+        </div>
+      </article>
 
     </div>
+
+
+    <!-- 投稿フォームを開くボタン -->
+
+    <button
+      type="button"
+      class="design-button post-button"
+      id="openFormButton">
+
+      <span class="button-icon" aria-hidden="true">💬</span>
+      <span class="button-label">メッセージを投稿する</span>
+      <span class="button-arrow" aria-hidden="true">→</span>
+    </button>
+
   </section>
 
-  <!-- 03 SUZURI -->
-  <section>
-    <h2>03　ひろさんの創作ギャラリー</h2>
-    <p class="lead">
-      チョコレートの世界から、イラストと言葉の世界へ。
-    </p>
 
-    <div class="suzuri">
-      <h3>monochromeH2</h3>
+  <!-- =========================
+       右カラム：運営者プロフィール
+  ========================= -->
 
+  <aside class="panel profile-panel">
+
+    <div class="profile-heading">
+
+      <!-- CCCのロゴ画像がある場合はファイル名を変更してください -->
+      <img
+        class="profile-logo"
+        src="logo.png"
+        alt=""
+        onerror="this.style.display='none'">
+
+      <div>
+        <small>Chocolate Craft Campus</small>
+        <h2>運営者プロフィール</h2>
+      </div>
+
+    </div>
+
+
+    <div class="profile-table">
+
+      <div class="profile-label">運営者</div>
+
+      <div class="profile-value">
+        <p class="profile-name">ひめひろ</p>
+        <p class="profile-caption">
+          （もとコピーライター／イラスト＆ポエム作家）
+        </p>
+      </div>
+
+
+      <div class="profile-label">受賞歴</div>
+
+      <div class="profile-value award-list">
+        <span class="award-year">2002</span>
+        <span>
+          キャラクター活用コンペ優秀賞
+          <br>（主催：バンダイキャラクター研究所）
+        </span>
+
+        <span class="award-year">2011</span>
+        <span>
+          福島県大型観光キャンペーンキャッチコピー入選
+        </span>
+
+        <span class="award-year">2021</span>
+        <span>メトロ文学館 優秀作品賞受賞</span>
+
+        <span class="award-year">2022</span>
+        <span>メトロ文学館 入選作品賞受賞</span>
+      </div>
+
+
+      <div class="profile-label">資格</div>
+
+      <div class="profile-value">
+        <ul class="profile-list">
+          <li>チョコレートスペシャリスト（初級）</li>
+          <li>チョコレートエキスパート（中級）</li>
+          <li>宅地建物取引士</li>
+          <li>福祉住環境コーディネーター</li>
+          <li>薬草ガーデンマスター</li>
+        </ul>
+      </div>
+
+
+      <div class="profile-label">イラスト＆<br>ポエム集</div>
+
+      <div class="profile-value">
+        <ul class="profile-list">
+          <li>『いつでもモクちゃん』（2019）</li>
+          <li>『deku』（2020）</li>
+        </ul>
+      </div>
+
+    </div>
+
+
+    <div class="greeting-box">
+      <h3>運営者からひとこと</h3>
       <p>
-        イラストと詩、言葉から生まれる作品たち。
-        ひとつひとつの作品との出会いをお楽しみください。
+        チョコレートには、味わう楽しみだけでなく、
+        知る楽しみ、探す楽しみ、そして人とつながる楽しみがあります。
+        Chocolate Craft Campusが、あなたにとって新しい
+        チョコレートとの出会いの場になればうれしいです。
       </p>
-
-      <!-- 実際の作品画像を用意したら表示できます -->
-      <!--
-      <img src="images/suzuri-work.jpg"
-           alt="monochromeH2の作品">
-      -->
-
-      <a class="shop-link"
-         href="https://suzuri.jp/monochromeH2"
-         target="_blank"
-         rel="noopener noreferrer">
-        SUZURIショップを見る ↗
-      </a>
     </div>
-  </section>
+
+
+    <!-- SUZURIへのリンク -->
+
+    <div class="shop-area">
+
+      <a
+        class="design-button shop-button"
+        href="https://suzuri.jp/monochromeH2"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        <span class="button-label">
+          SUZURI × monochromeH2
+          <small>オンラインショップへ移動する</small>
+        </span>
+
+        <span class="button-arrow" aria-hidden="true">→</span>
+
+      </a>
+
+    </div>
+
+  </aside>
 
 </main>
 
-<footer>
-  Chocolate Craft Campus<br>
-  知る、見つける、つながる。奥深きチョコレートの世界へ。
+
+<!-- =========================
+     フッター
+========================= -->
+
+<footer class="site-footer">
+
+  <div class="footer-brand">
+    <img
+      src="logo.png"
+      alt=""
+      onerror="this.style.display='none'">
+    <span>Chocolate Craft Campus</span>
+  </div>
+
+  <p>知る、見つける、つながる。奥深きチョコレートの世界へ。</p>
+
 </footer>
+
+
+<!-- =========================
+     投稿フォーム
+     現時点では送信先の設定が必要です
+========================= -->
+
+<div
+  class="modal"
+  id="postModal"
+  aria-hidden="true">
+
+  <div
+    class="modal-content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="formTitle">
+
+    <button
+      type="button"
+      class="close-button"
+      id="closeFormButton"
+      aria-label="閉じる">×</button>
+
+    <h2 id="formTitle">メッセージを投稿する</h2>
+
+    <p class="modal-intro">
+      チョコレートへの思いや、おすすめのお店の情報をお寄せください。
+    </p>
+
+    <!-- YOUR_FORM_ID は実際のFormspree IDに変更してください -->
+
+    <form
+      action="https://formspree.io/f/YOUR_FORM_ID"
+      method="POST">
+
+      <input
+        type="hidden"
+        name="_subject"
+        value="CCC チョコレートラウンジ投稿">
+
+      <label class="form-label" for="nickname">
+        ニックネーム（必須）
+      </label>
+
+      <input
+        class="form-control"
+        id="nickname"
+        name="nickname"
+        type="text"
+        maxlength="40"
+        required>
+
+
+      <label class="form-label" for="category">
+        投稿の種類
+      </label>
+
+      <select
+        class="form-control"
+        id="category"
+        name="category"
+        required>
+
+        <option value="メッセージ">メッセージ・感想</option>
+        <option value="店舗情報">チョコレートショップ情報</option>
+
+      </select>
+
+
+      <label class="form-label" for="shop">
+        店舗名（店舗情報の場合）
+      </label>
+
+      <input
+        class="form-control"
+        id="shop"
+        name="shop"
+        type="text"
+        maxlength="120">
+
+
+      <label class="form-label" for="prefecture">
+        都道府県（店舗情報の場合）
+      </label>
+
+      <input
+        class="form-control"
+        id="prefecture"
+        name="prefecture"
+        type="text"
+        maxlength="30">
+
+
+      <label class="form-label" for="shopurl">
+        店舗の公式サイト（任意）
+      </label>
+
+      <input
+        class="form-control"
+        id="shopurl"
+        name="shop_url"
+        type="url"
+        maxlength="500"
+        placeholder="https://...">
+
+
+      <label class="form-label" for="message">
+        メッセージ・おすすめポイント（必須）
+      </label>
+
+      <textarea
+        class="form-control"
+        id="message"
+        name="message"
+        maxlength="2000"
+        required></textarea>
+
+
+      <p class="form-note">
+        投稿は管理者が内容を確認し、承認したもののみサイトに掲載します。
+        送信しただけでは公開されません。
+      </p>
+
+      <label class="consent-label">
+        <input
+          type="checkbox"
+          name="publication_consent"
+          value="同意"
+          required>
+
+        <span>
+          投稿内容が管理者の承認後に公開されることに同意します。
+        </span>
+      </label>
+
+
+      <button class="submit-button" type="submit">
+        投稿を送信する
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script>
+/* =========================
+   投稿フォームの開閉
+========================= */
+
+const postModal = document.getElementById("postModal");
+const openFormButton = document.getElementById("openFormButton");
+const closeFormButton = document.getElementById("closeFormButton");
+
+function openPostForm() {
+  postModal.classList.add("is-open");
+  postModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  document.getElementById("nickname").focus();
+}
+
+function closePostForm() {
+  postModal.classList.remove("is-open");
+  postModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
+
+openFormButton.addEventListener("click", openPostForm);
+closeFormButton.addEventListener("click", closePostForm);
+
+/* フォームの外側をクリックすると閉じる */
+
+postModal.addEventListener("click", function(event) {
+  if (event.target === postModal) {
+    closePostForm();
+  }
+});
+
+/* Escapeキーでも閉じる */
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape" && postModal.classList.contains("is-open")) {
+    closePostForm();
+  }
+});
+</script>
 
 </body>
 </html>
