@@ -14,6 +14,10 @@
    全体
 ========================= */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     background-color: #2b1a14;
@@ -140,6 +144,7 @@ body {
 
 /* =========================
    PC用 クリック位置
+   ※変更なし
 ========================= */
 
 /* チョコレート店舗紹介 */
@@ -182,7 +187,7 @@ body {
 }
 
 
-/* チョコレートラウンジ：5番目 */
+/* チョコレートラウンジ */
 
 .lounge-link {
     left: 79.2%;
@@ -193,7 +198,7 @@ body {
 
 
 /* =========================
-   スマートフォン
+   スマートフォン用
 ========================= */
 
 @media (max-width: 768px) {
@@ -220,13 +225,18 @@ body {
     }
 
 
+    /* =========================
+       スマホ用クリック位置
+       scategory.png の実寸に合わせて修正
+    ========================= */
+
     /* チョコレート店舗紹介 */
 
     .shop-link {
         left: 5%;
-        top: 26.6%;
-        width: 90%;
-        height: 11.5%;
+        top: 28.8%;
+        width: 88%;
+        height: 12.3%;
     }
 
 
@@ -234,9 +244,9 @@ body {
 
     .world-link {
         left: 5%;
-        top: 38.7%;
-        width: 90%;
-        height: 11.6%;
+        top: 41.8%;
+        width: 88%;
+        height: 12.3%;
     }
 
 
@@ -244,9 +254,9 @@ body {
 
     .history-link {
         left: 5%;
-        top: 51.1%;
-        width: 90%;
-        height: 11.7%;
+        top: 55.2%;
+        width: 88%;
+        height: 12.3%;
     }
 
 
@@ -254,19 +264,19 @@ body {
 
     .column-link {
         left: 5%;
-        top: 63.5%;
-        width: 90%;
-        height: 11.5%;
+        top: 68.6%;
+        width: 88%;
+        height: 12.3%;
     }
 
 
-    /* チョコレートラウンジ：5番目 */
+    /* チョコレートラウンジ */
 
     .lounge-link {
         left: 5%;
-        top: 75.8%;
-        width: 90%;
-        height: 11.2%;
+        top: 81.9%;
+        width: 88%;
+        height: 12.3%;
     }
 
 }
@@ -527,4 +537,5 @@ historyLink.addEventListener("click", function(event) {
 
 </body>
 </html>
+
 
