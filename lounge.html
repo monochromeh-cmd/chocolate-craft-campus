@@ -151,7 +151,16 @@ textarea {
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.13);
 }
-
+   
+.message-empty {
+  margin: 0;
+  padding: 28px 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: center;
+}
+   
 .message-item {
   display: grid;
   grid-template-columns: 56px minmax(0, 1fr) 125px;
@@ -830,133 +839,15 @@ body.modal-open {
       </div>
     </div>
 
+<div class="message-list" id="messageList">
 
-    <div class="message-list">
+  <p class="message-empty">
+    現在、掲載中のメッセージはありません。
+    <br>
+    皆さまからの投稿をお待ちしています。
+  </p>
 
-      <!-- 以下はレイアウト確認用のサンプルです -->
-
-      <article class="message-item">
-        <div class="avatar" aria-hidden="true">👤</div>
-
-        <div class="message-content">
-          <h3 class="message-name">ショコラ好き</h3>
-          <p class="message-text">はじめまして。サイトを拝見して、チョコレートの奥深さにとても感動しました。
-これからも楽しみにしています！</p>
-        </div>
-
-        <div class="message-meta">
-          <time class="message-date" datetime="2026-10-26T18:45">
-            2026/10/26　18:45
-          </time>
-          <span class="comment-count">
-            <span class="comment-icon" aria-hidden="true">▱</span> 1
-          </span>
-        </div>
-      </article>
-
-
-      <article class="message-item">
-        <div class="avatar" aria-hidden="true">👤</div>
-
-        <div class="message-content">
-          <h3 class="message-name">カカオの旅人</h3>
-          <p class="message-text">カカオポリフェノールのコラム、参考になりました。
-健康にも良いなんて、もっとチョコレートを楽しみたくなりました。</p>
-        </div>
-
-        <div class="message-meta">
-          <time class="message-date" datetime="2026-10-25T21:32">
-            2026/10/25　21:32
-          </time>
-          <span class="comment-count">
-            <span class="comment-icon" aria-hidden="true">▱</span> 2
-          </span>
-        </div>
-      </article>
-
-
-      <article class="message-item">
-        <div class="avatar" aria-hidden="true">👤</div>
-
-        <div class="message-content">
-          <h3 class="message-name">チョコレート大好き</h3>
-          <p class="message-text">「deku」とても素敵な作品ですね。心があたたかくなりました。
-また新しい作品を楽しみにしています。</p>
-        </div>
-
-        <div class="message-meta">
-          <time class="message-date" datetime="2026-10-24T12:17">
-            2026/10/24　12:17
-          </time>
-          <span class="comment-count">
-            <span class="comment-icon" aria-hidden="true">▱</span> 1
-          </span>
-        </div>
-      </article>
-
-
-      <article class="message-item">
-        <div class="avatar" aria-hidden="true">👤</div>
-
-        <div class="message-content">
-          <h3 class="message-name">スイーツ日和</h3>
-          <p class="message-text">全国のチョコレートショップの情報がうれしいです。
-実際に行ってみたくなりました！</p>
-        </div>
-
-        <div class="message-meta">
-          <time class="message-date" datetime="2026-10-22T09:36">
-            2026/10/22　09:36
-          </time>
-          <span class="comment-count">
-            <span class="comment-icon" aria-hidden="true">▱</span> 0
-          </span>
-        </div>
-      </article>
-
-
-      <article class="message-item">
-        <div class="avatar" aria-hidden="true">👤</div>
-
-        <div class="message-content">
-          <h3 class="message-name">まる</h3>
-          <p class="message-text">チョコレートの歴史、知らないことがたくさんで、とても興味深かったです。
-これからもいろいろな情報を発信してください。</p>
-        </div>
-
-        <div class="message-meta">
-          <time class="message-date" datetime="2026-10-20T20:11">
-            2026/10/20　20:11
-          </time>
-          <span class="comment-count">
-            <span class="comment-icon" aria-hidden="true">▱</span> 3
-          </span>
-        </div>
-      </article>
-
-
-      <article class="message-item">
-        <div class="avatar" aria-hidden="true">👤</div>
-
-        <div class="message-content">
-          <h3 class="message-name">choco_love</h3>
-          <p class="message-text">SUZURIの作品、どれも素敵で迷ってしまいます！
-これからも応援しています。</p>
-        </div>
-
-        <div class="message-meta">
-          <time class="message-date" datetime="2026-10-18T16:52">
-            2026/10/18　16:52
-          </time>
-          <span class="comment-count">
-            <span class="comment-icon" aria-hidden="true">▱</span> 1
-          </span>
-        </div>
-      </article>
-
-    </div>
-
-
+</div> 
     <!-- 投稿フォームを開くボタン -->
 
     <button
