@@ -84,7 +84,7 @@
       >
     </picture>
 
-    <!-- チョコレートができるまでをクリックするとprocess.pngへ移動 -->
+    <!-- PC版・スマートフォン版でリンク先を切り替え -->
     <a
       class="process-link"
       href="process.png"
@@ -93,6 +93,13 @@
     ></a>
 
   </main>
+
+  <script>
+    // スマートフォン版はsprocess.pngへ切り替え
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      document.querySelector(".process-link").href = "sprocess.png";
+    }
+  </script>
 
 </body>
 </html>
