@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The World of Chocolate｜チョコレートの世界</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #1b0d04;
+    }
+
+    .world-page {
+      position: relative;
+      width: 100%;
+      max-width: 1536px;
+      margin: 0 auto;
+      line-height: 0;
+    }
+
+    .world-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* PC版：中央のカードをクリック可能にする */
+    .process-link {
+      position: absolute;
+      left: 34.9%;
+      top: 30.7%;
+      width: 30.5%;
+      height: 59.0%;
+      display: block;
+      z-index: 5;
+      border-radius: 14px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .process-link:focus-visible {
+      outline: 3px solid #ffcf75;
+      outline-offset: 3px;
+    }
+
+    /* スマートフォン版 */
+    @media (max-width: 700px) {
+      .world-page {
+        max-width: 100%;
+      }
+
+      .process-link {
+        left: 4.4%;
+        top: 46.9%;
+        width: 88.8%;
+        height: 20.9%;
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="world-page">
+
+    <!-- PC版・スマートフォン版の画像切り替え -->
+    <picture>
+      <source
+        media="(max-width: 700px)"
+        srcset="sworld.png"
+      >
+
+      <img
+        class="world-image"
+        src="world.png"
+        alt="The World of Chocolate"
+      >
+    </picture>
+
+    <!-- チョコレートができるまでをクリックするとprocess.pngへ移動 -->
+    <a
+      class="process-link"
+      href="process.png"
+      aria-label="チョコレートができるまで"
+      title="チョコレートができるまで"
+    ></a>
+
+  </main>
+
+</body>
+</html>
