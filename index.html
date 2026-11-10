@@ -198,6 +198,26 @@ body {
 
 
 /* =========================
+   チョコレート製造工程へのリンク
+========================= */
+
+.world-process-link {
+    position: absolute;
+    display: block;
+    z-index: 10;
+
+    /* PC版 */
+
+    left: 34.9%;
+    top: 30.7%;
+    width: 30.5%;
+    height: 59.0%;
+
+    border-radius: 14px;
+}
+
+
+/* =========================
    スマートフォン用
 ========================= */
 
@@ -277,6 +297,16 @@ body {
         top: 81.9%;
         width: 88%;
         height: 12.3%;
+    }
+
+
+    /* チョコレート製造工程へのリンク */
+
+    .world-process-link {
+        left: 4.4%;
+        top: 46.9%;
+        width: 88.8%;
+        height: 20.9%;
     }
 
 }
@@ -388,6 +418,16 @@ body {
             alt="The World of Chocolate チョコレートの世界">
 
     </picture>
+
+
+    <!-- チョコレートができるまで -->
+
+    <a
+        href="process.png"
+        class="world-process-link"
+        aria-label="チョコレートができるまで">
+    </a>
+
 
 </div>
 
@@ -537,5 +577,3 @@ historyLink.addEventListener("click", function(event) {
 
 </body>
 </html>
-
-
