@@ -31,8 +31,8 @@
       height: auto;
     }
 
-    /* PC版：中央のカードをクリック可能にする */
-    .process-link {
+    /* PC版リンク */
+    .process-link-pc {
       position: absolute;
       left: 34.9%;
       top: 30.7%;
@@ -44,23 +44,40 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    .process-link:focus-visible {
+    /* スマホ版リンクはPCでは非表示 */
+    .process-link-sp {
+      display: none;
+    }
+
+    .process-link-pc:focus-visible,
+    .process-link-sp:focus-visible {
       outline: 3px solid #ffcf75;
       outline-offset: 3px;
     }
 
     /* スマートフォン版 */
     @media (max-width: 700px) {
+
       .world-page {
         max-width: 100%;
       }
 
-      .process-link {
+      /* PC版リンクを非表示 */
+      .process-link-pc {
+        display: none;
+      }
+
+      /* スマホ版リンク */
+      .process-link-sp {
+        position: absolute;
         left: 4.4%;
         top: 46.9%;
         width: 88.8%;
         height: 20.9%;
+        display: block;
+        z-index: 5;
         border-radius: 14px;
+        -webkit-tap-highlight-color: transparent;
       }
     }
   </style>
@@ -84,22 +101,24 @@
       >
     </picture>
 
-    <!-- PC版・スマートフォン版でリンク先を切り替え -->
+    <!-- PC版リンク -->
     <a
-      class="process-link"
+      class="process-link-pc"
       href="process.png"
+      aria-label="チョコレートができるまで"
+      title="チョコレートができるまで"
+    ></a>
+
+    <!-- スマートフォン版リンク -->
+    <a
+      class="process-link-sp"
+      href="sprocess.png"
       aria-label="チョコレートができるまで"
       title="チョコレートができるまで"
     ></a>
 
   </main>
 
-  <script>
-    // スマートフォン版はsprocess.pngへ切り替え
-    if (window.matchMedia("(max-width: 700px)").matches) {
-      document.querySelector(".process-link").href = "sprocess.png";
-    }
-  </script>
-
 </body>
 </html>
+
