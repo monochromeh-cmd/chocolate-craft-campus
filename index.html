@@ -422,11 +422,12 @@ body {
 
     <!-- チョコレートができるまで -->
 
-    <a
-        href="process.png"
-        class="world-process-link"
-        aria-label="チョコレートができるまで">
-    </a>
+<a
+    href="process.png"
+    class="world-process-link"
+    id="worldProcessLink"
+    aria-label="チョコレートができるまで">
+</a>
 
 
 </div>
@@ -504,6 +505,39 @@ const worldLink =
 
 const historyLink =
     document.getElementById("historyLink");
+
+/* =========================
+   チョコレート製造工程リンク
+   PC・スマホ切り替え
+========================= */
+
+const worldProcessLink =
+    document.getElementById("worldProcessLink");
+
+
+function updateWorldProcessLink() {
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+
+        worldProcessLink.href = "sprocess.png";
+
+    } else {
+
+        worldProcessLink.href = "process.png";
+
+    }
+
+}
+
+
+/* 初回読み込み時に設定 */
+
+updateWorldProcessLink();
+
+
+/* 画面サイズ変更時にも再設定 */
+
+window.addEventListener("resize", updateWorldProcessLink);   
 
 
 /* =========================
