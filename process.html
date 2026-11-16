@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chocolate Craft Campus｜チョコレートができるまで</title>
+
+<style>
+
+/* =========================
+   全体設定
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #1b0d04;
+    color: #fff;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN",
+                 "Noto Serif JP", serif;
+}
+
+/* =========================
+   工程画像
+========================= */
+
+.process-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.process-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* =========================
+   受け入れクリックエリア
+========================= */
+
+.receiving-link {
+    position: absolute;
+    display: block;
+    z-index: 2;
+
+    /* PC用：1 受け入れの位置 */
+    left: 2.5%;
+    top: 26%;
+    width: 18.5%;
+    height: 19%;
+
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 20px;
+
+    transition: background 0.2s ease;
+}
+
+.receiving-link:hover {
+    background: rgba(255, 211, 105, 0.10);
+}
+
+.receiving-link:focus-visible {
+    outline: 3px solid #ffda83;
+    outline-offset: 3px;
+}
+
+/* =========================
+   ポップアップ背景
+========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+
+    background: rgba(0, 0, 0, 0.88);
+
+    justify-content: center;
+    align-items: center;
+}
+
+/* 表示状態 */
+
+.modal.active {
+    display: flex;
+}
+
+/* =========================
+   ポップアップ本体
+========================= */
+
+.modal-content {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 1100px;
+    max-height: 94vh;
+}
+
+/* 解説画像 */
+
+.modal-image {
+    display: block;
+
+    max-width: 100%;
+    max-height: 90vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+}
+
+/* =========================
+   閉じるボタン
+========================= */
+
+.close-button {
+    position: absolute;
+
+    top: -18px;
+    right: -18px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid #f4cf79;
+    border-radius: 50%;
+
+    background: #351609;
+    color: #fff0c5;
+
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition: 0.2s;
+}
+
+.close-button:hover {
+    background: #9b571e;
+    transform: scale(1.08);
+}
+
+/* =========================
+   スマートフォン
+========================= */
+
+@media screen and (max-width: 767px) {
+
+    .process-container {
+        width: 100%;
+    }
+
+    /* スマホ用：1 受け入れの位置 */
+
+    .receiving-link {
+        left: 3.7%;
+        top: 17.8%;
+        width: 30.5%;
+        height: 12.5%;
+    }
+
+    .modal {
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: 100%;
+        max-height: 94vh;
+    }
+
+    .modal-image {
+        max-width: 100%;
+        max-height: 88vh;
+    }
+
+    .close-button {
+        top: -12px;
+        right: -5px;
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 28px;
+    }
+
+}
+
+/* =========================
+   背景スクロール制御
+========================= */
+
+body.modal-open {
+    overflow: hidden;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     工程一覧
+========================= -->
+
+<div class="process-container">
+
+    <picture>
+
+        <!-- スマートフォン用 -->
+        <source
+            media="(max-width: 767px)"
+            srcset="sprocess.png">
+
+        <!-- PC用 -->
+        <img
+            src="process.png"
+            alt="チョコレートができるまで"
+            class="process-image">
+
+    </picture>
+
+
+    <!-- 1 受け入れ クリックエリア -->
+
+    <button
+        type="button"
+        class="receiving-link"
+        aria-label="1 受け入れの解説を開く"
+        onclick="openReceiving()">
+    </button>
+
+</div>
+
+
+
+<!-- =========================
+     受け入れ ポップアップ
+========================= -->
+
+<div
+    id="receivingModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="原料（カカオ豆）の受け入れ">
+
+    <div class="modal-content">
+
+        <!-- 閉じるボタン -->
+
+        <button
+            type="button"
+            class="close-button"
+            aria-label="閉じる"
+            onclick="closeReceiving()">
+
+            ×
+
+        </button>
+
+
+        <!-- PC・スマホ画像切り替え -->
+
+        <picture>
+
+            <!-- スマートフォン用 -->
+            <source
+                media="(max-width: 767px)"
+                srcset="1sreceiving.png">
+
+            <!-- PC用 -->
+            <img
+                src="1receiving.png"
+                alt="原料（カカオ豆）の受け入れ"
+                class="modal-image">
+
+        </picture>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     JavaScript
+========================= -->
+
+<script>
+
+/* =========================
+   ポップアップを開く
+========================= */
+
+function openReceiving() {
+
+    const modal = document.getElementById("receivingModal");
+
+    modal.classList.add("active");
+
+    document.body.classList.add("modal-open");
+
+}
+
+
+/* =========================
+   ポップアップを閉じる
+========================= */
+
+function closeReceiving() {
+
+    const modal = document.getElementById("receivingModal");
+
+    modal.classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+
+}
+
+
+/* =========================
+   背景クリックで閉じる
+========================= */
+
+document.getElementById("receivingModal").addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === this) {
+            closeReceiving();
+        }
+
+    }
+);
+
+
+/* =========================
+   Escキーで閉じる
+========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        closeReceiving();
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>
