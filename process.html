@@ -50,7 +50,7 @@ body {
 }
 
 /* =========================
-   受け入れクリックエリア
+   1 受け入れクリックエリア
 ========================= */
 
 .receiving-link {
@@ -58,7 +58,7 @@ body {
     display: block;
     z-index: 2;
 
-    /* PC用：1 受け入れの位置 */
+    /* PC用 */
     left: 2.5%;
     top: 26%;
     width: 18.5%;
@@ -78,6 +78,39 @@ body {
 }
 
 .receiving-link:focus-visible {
+    outline: 3px solid #ffda83;
+    outline-offset: 3px;
+}
+
+/* =========================
+   2 選別クリックエリア
+========================= */
+
+.cleaner-link {
+    position: absolute;
+    display: block;
+    z-index: 2;
+
+    /* PC用：2 選別の位置 */
+    left: 22.5%;
+    top: 26%;
+    width: 18.5%;
+    height: 19%;
+
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 20px;
+
+    transition: background 0.2s ease;
+}
+
+.cleaner-link:hover {
+    background: rgba(255, 211, 105, 0.10);
+}
+
+.cleaner-link:focus-visible {
     outline: 3px solid #ffda83;
     outline-offset: 3px;
 }
@@ -191,10 +224,19 @@ body {
         width: 100%;
     }
 
-    /* スマホ用：1 受け入れの位置 */
+    /* 1 受け入れ */
 
     .receiving-link {
         left: 3.7%;
+        top: 17.8%;
+        width: 30.5%;
+        height: 12.5%;
+    }
+
+    /* 2 選別 */
+
+    .cleaner-link {
+        left: 34%;
         top: 17.8%;
         width: 30.5%;
         height: 12.5%;
@@ -272,12 +314,22 @@ body.modal-open {
         onclick="openReceiving()">
     </button>
 
+
+    <!-- 2 選別 クリックエリア -->
+
+    <button
+        type="button"
+        class="cleaner-link"
+        aria-label="2 選別の解説を開く"
+        onclick="openCleaner()">
+    </button>
+
 </div>
 
 
 
 <!-- =========================
-     受け入れ ポップアップ
+     1 受け入れ ポップアップ
 ========================= -->
 
 <div
@@ -326,13 +378,62 @@ body.modal-open {
 
 
 <!-- =========================
+     2 選別 ポップアップ
+========================= -->
+
+<div
+    id="cleanerModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="カカオ豆の選別（クリーナー）">
+
+    <div class="modal-content">
+
+        <!-- 閉じるボタン -->
+
+        <button
+            type="button"
+            class="close-button"
+            aria-label="閉じる"
+            onclick="closeCleaner()">
+
+            ×
+
+        </button>
+
+
+        <!-- PC・スマホ画像切り替え -->
+
+        <picture>
+
+            <!-- スマートフォン用 -->
+            <source
+                media="(max-width: 767px)"
+                srcset="2scleaner.png">
+
+            <!-- PC用 -->
+            <img
+                src="2cleaner.png"
+                alt="2 選別（クリーナー）の工程解説"
+                class="modal-image">
+
+        </picture>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
      JavaScript
 ========================= -->
 
 <script>
 
 /* =========================
-   ポップアップを開く
+   1 受け入れを開く
 ========================= */
 
 function openReceiving() {
@@ -347,12 +448,42 @@ function openReceiving() {
 
 
 /* =========================
-   ポップアップを閉じる
+   1 受け入れを閉じる
 ========================= */
 
 function closeReceiving() {
 
     const modal = document.getElementById("receivingModal");
+
+    modal.classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+
+}
+
+
+/* =========================
+   2 選別を開く
+========================= */
+
+function openCleaner() {
+
+    const modal = document.getElementById("cleanerModal");
+
+    modal.classList.add("active");
+
+    document.body.classList.add("modal-open");
+
+}
+
+
+/* =========================
+   2 選別を閉じる
+========================= */
+
+function closeCleaner() {
+
+    const modal = document.getElementById("cleanerModal");
 
     modal.classList.remove("active");
 
@@ -377,6 +508,18 @@ document.getElementById("receivingModal").addEventListener(
 );
 
 
+document.getElementById("cleanerModal").addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === this) {
+            closeCleaner();
+        }
+
+    }
+);
+
+
 /* =========================
    Escキーで閉じる
 ========================= */
@@ -384,7 +527,11 @@ document.getElementById("receivingModal").addEventListener(
 document.addEventListener("keydown", function(event) {
 
     if (event.key === "Escape") {
+
         closeReceiving();
+
+        closeCleaner();
+
     }
 
 });
@@ -394,3 +541,4 @@ document.addEventListener("keydown", function(event) {
 
 </body>
 </html>
+
