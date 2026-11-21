@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -111,6 +110,39 @@ body {
 }
 
 .cleaner-link:focus-visible {
+    outline: 3px solid #ffda83;
+    outline-offset: 3px;
+}
+
+/* =========================
+   3 ローストクリックエリア
+========================= */
+
+.roast-link {
+    position: absolute;
+    display: block;
+    z-index: 2;
+
+    /* PC用：3 ローストの位置 */
+    left: 42.5%;
+    top: 26%;
+    width: 18.5%;
+    height: 19%;
+
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 20px;
+
+    transition: background 0.2s ease;
+}
+
+.roast-link:hover {
+    background: rgba(255, 211, 105, 0.10);
+}
+
+.roast-link:focus-visible {
     outline: 3px solid #ffda83;
     outline-offset: 3px;
 }
@@ -242,6 +274,15 @@ body {
         height: 12.5%;
     }
 
+    /* 3 ロースト */
+
+    .roast-link {
+        left: 64.3%;
+        top: 17.8%;
+        width: 30.5%;
+        height: 12.5%;
+    }
+
     .modal {
         padding: 12px;
     }
@@ -322,6 +363,16 @@ body.modal-open {
         class="cleaner-link"
         aria-label="2 選別の解説を開く"
         onclick="openCleaner()">
+    </button>
+
+
+    <!-- 3 ロースト クリックエリア -->
+
+    <button
+        type="button"
+        class="roast-link"
+        aria-label="3 ローストの解説を開く"
+        onclick="openRoast()">
     </button>
 
 </div>
@@ -427,6 +478,55 @@ body.modal-open {
 
 
 <!-- =========================
+     3 ロースト ポップアップ
+========================= -->
+
+<div
+    id="roastModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="カカオ豆のロースト（焙煎）">
+
+    <div class="modal-content">
+
+        <!-- 閉じるボタン -->
+
+        <button
+            type="button"
+            class="close-button"
+            aria-label="閉じる"
+            onclick="closeRoast()">
+
+            ×
+
+        </button>
+
+
+        <!-- PC・スマホ画像切り替え -->
+
+        <picture>
+
+            <!-- スマートフォン用 -->
+            <source
+                media="(max-width: 767px)"
+                srcset="3sroast.png">
+
+            <!-- PC用 -->
+            <img
+                src="3roast.png"
+                alt="3 ロースト（焙煎）の工程解説"
+                class="modal-image">
+
+        </picture>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
      JavaScript
 ========================= -->
 
@@ -493,6 +593,36 @@ function closeCleaner() {
 
 
 /* =========================
+   3 ローストを開く
+========================= */
+
+function openRoast() {
+
+    const modal = document.getElementById("roastModal");
+
+    modal.classList.add("active");
+
+    document.body.classList.add("modal-open");
+
+}
+
+
+/* =========================
+   3 ローストを閉じる
+========================= */
+
+function closeRoast() {
+
+    const modal = document.getElementById("roastModal");
+
+    modal.classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+
+}
+
+
+/* =========================
    背景クリックで閉じる
 ========================= */
 
@@ -520,6 +650,18 @@ document.getElementById("cleanerModal").addEventListener(
 );
 
 
+document.getElementById("roastModal").addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === this) {
+            closeRoast();
+        }
+
+    }
+);
+
+
 /* =========================
    Escキーで閉じる
 ========================= */
@@ -532,6 +674,8 @@ document.addEventListener("keydown", function(event) {
 
         closeCleaner();
 
+        closeRoast();
+
     }
 
 });
@@ -541,4 +685,3 @@ document.addEventListener("keydown", function(event) {
 
 </body>
 </html>
-
