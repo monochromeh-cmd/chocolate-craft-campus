@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -49,102 +50,83 @@ body {
 }
 
 /* =========================
-   1 受け入れクリックエリア
+   共通クリックエリア
 ========================= */
 
-.receiving-link {
+.receiving-link,
+.cleaner-link,
+.roast-link,
+.winnowing-link {
     position: absolute;
     display: block;
     z-index: 2;
 
-    /* PC用 */
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 20px;
+
+    transition: background 0.2s ease;
+}
+
+.receiving-link:hover,
+.cleaner-link:hover,
+.roast-link:hover,
+.winnowing-link:hover {
+    background: rgba(255, 211, 105, 0.10);
+}
+
+.receiving-link:focus-visible,
+.cleaner-link:focus-visible,
+.roast-link:focus-visible,
+.winnowing-link:focus-visible {
+    outline: 3px solid #ffda83;
+    outline-offset: 3px;
+}
+
+/* =========================
+   1 受け入れ
+========================= */
+
+.receiving-link {
     left: 2.5%;
     top: 26%;
     width: 18.5%;
     height: 19%;
-
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-    border-radius: 20px;
-
-    transition: background 0.2s ease;
-}
-
-.receiving-link:hover {
-    background: rgba(255, 211, 105, 0.10);
-}
-
-.receiving-link:focus-visible {
-    outline: 3px solid #ffda83;
-    outline-offset: 3px;
 }
 
 /* =========================
-   2 選別クリックエリア
+   2 選別
 ========================= */
 
 .cleaner-link {
-    position: absolute;
-    display: block;
-    z-index: 2;
-
-    /* PC用：2 選別の位置 */
     left: 22.5%;
     top: 26%;
     width: 18.5%;
     height: 19%;
-
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-    border-radius: 20px;
-
-    transition: background 0.2s ease;
-}
-
-.cleaner-link:hover {
-    background: rgba(255, 211, 105, 0.10);
-}
-
-.cleaner-link:focus-visible {
-    outline: 3px solid #ffda83;
-    outline-offset: 3px;
 }
 
 /* =========================
-   3 ローストクリックエリア
+   3 ロースト
 ========================= */
 
 .roast-link {
-    position: absolute;
-    display: block;
-    z-index: 2;
-
-    /* PC用：3 ローストの位置 */
     left: 42.5%;
     top: 26%;
     width: 18.5%;
     height: 19%;
-
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-    border-radius: 20px;
-
-    transition: background 0.2s ease;
 }
 
-.roast-link:hover {
-    background: rgba(255, 211, 105, 0.10);
-}
+/* =========================
+   4 分離（ウィノーイング）
+========================= */
 
-.roast-link:focus-visible {
-    outline: 3px solid #ffda83;
-    outline-offset: 3px;
+.winnowing-link {
+    left: 61.2%;
+    top: 26%;
+    width: 18.5%;
+    height: 19%;
 }
 
 /* =========================
@@ -283,6 +265,17 @@ body {
         height: 12.5%;
     }
 
+    /* 4 分離 */
+
+    .winnowing-link {
+        left: 3.7%;
+        top: 28.8%;
+        width: 30.5%;
+        height: 12.5%;
+    }
+
+    /* ポップアップ */
+
     .modal {
         padding: 12px;
     }
@@ -333,11 +326,13 @@ body.modal-open {
     <picture>
 
         <!-- スマートフォン用 -->
+
         <source
             media="(max-width: 767px)"
             srcset="sprocess.png">
 
         <!-- PC用 -->
+
         <img
             src="process.png"
             alt="チョコレートができるまで"
@@ -346,7 +341,7 @@ body.modal-open {
     </picture>
 
 
-    <!-- 1 受け入れ クリックエリア -->
+    <!-- 1 受け入れ -->
 
     <button
         type="button"
@@ -356,7 +351,7 @@ body.modal-open {
     </button>
 
 
-    <!-- 2 選別 クリックエリア -->
+    <!-- 2 選別 -->
 
     <button
         type="button"
@@ -366,13 +361,23 @@ body.modal-open {
     </button>
 
 
-    <!-- 3 ロースト クリックエリア -->
+    <!-- 3 ロースト -->
 
     <button
         type="button"
         class="roast-link"
         aria-label="3 ローストの解説を開く"
         onclick="openRoast()">
+    </button>
+
+
+    <!-- 4 分離（ウィノーイング） -->
+
+    <button
+        type="button"
+        class="winnowing-link"
+        aria-label="4 分離の解説を開く"
+        onclick="openWinnowing()">
     </button>
 
 </div>
@@ -392,29 +397,24 @@ body.modal-open {
 
     <div class="modal-content">
 
-        <!-- 閉じるボタン -->
-
         <button
             type="button"
             class="close-button"
             aria-label="閉じる"
             onclick="closeReceiving()">
-
             ×
-
         </button>
-
-
-        <!-- PC・スマホ画像切り替え -->
 
         <picture>
 
             <!-- スマートフォン用 -->
+
             <source
                 media="(max-width: 767px)"
                 srcset="1sreceiving.png">
 
             <!-- PC用 -->
+
             <img
                 src="1receiving.png"
                 alt="原料（カカオ豆）の受け入れ"
@@ -441,29 +441,24 @@ body.modal-open {
 
     <div class="modal-content">
 
-        <!-- 閉じるボタン -->
-
         <button
             type="button"
             class="close-button"
             aria-label="閉じる"
             onclick="closeCleaner()">
-
             ×
-
         </button>
-
-
-        <!-- PC・スマホ画像切り替え -->
 
         <picture>
 
             <!-- スマートフォン用 -->
+
             <source
                 media="(max-width: 767px)"
                 srcset="2scleaner.png">
 
             <!-- PC用 -->
+
             <img
                 src="2cleaner.png"
                 alt="2 選別（クリーナー）の工程解説"
@@ -490,32 +485,75 @@ body.modal-open {
 
     <div class="modal-content">
 
+        <button
+            type="button"
+            class="close-button"
+            aria-label="閉じる"
+            onclick="closeRoast()">
+            ×
+        </button>
+
+        <picture>
+
+            <!-- スマートフォン用 -->
+
+            <source
+                media="(max-width: 767px)"
+                srcset="3sroast.png">
+
+            <!-- PC用 -->
+
+            <img
+                src="3roast.png"
+                alt="3 ロースト（焙煎）の工程解説"
+                class="modal-image">
+
+        </picture>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     4 分離 ポップアップ
+========================= -->
+
+<div
+    id="winnowingModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="カカオ豆の分離（ウィノーイング）">
+
+    <div class="modal-content">
+
         <!-- 閉じるボタン -->
 
         <button
             type="button"
             class="close-button"
             aria-label="閉じる"
-            onclick="closeRoast()">
-
+            onclick="closeWinnowing()">
             ×
-
         </button>
-
 
         <!-- PC・スマホ画像切り替え -->
 
         <picture>
 
             <!-- スマートフォン用 -->
+
             <source
                 media="(max-width: 767px)"
-                srcset="3sroast.png">
+                srcset="4swinnowing.png">
 
             <!-- PC用 -->
+
             <img
-                src="3roast.png"
-                alt="3 ロースト（焙煎）の工程解説"
+                src="4winnowing.png"
+                alt="4 分離（ウィノーイング）の工程解説"
                 class="modal-image">
 
         </picture>
@@ -623,6 +661,36 @@ function closeRoast() {
 
 
 /* =========================
+   4 分離を開く
+========================= */
+
+function openWinnowing() {
+
+    const modal = document.getElementById("winnowingModal");
+
+    modal.classList.add("active");
+
+    document.body.classList.add("modal-open");
+
+}
+
+
+/* =========================
+   4 分離を閉じる
+========================= */
+
+function closeWinnowing() {
+
+    const modal = document.getElementById("winnowingModal");
+
+    modal.classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+
+}
+
+
+/* =========================
    背景クリックで閉じる
 ========================= */
 
@@ -662,6 +730,18 @@ document.getElementById("roastModal").addEventListener(
 );
 
 
+document.getElementById("winnowingModal").addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === this) {
+            closeWinnowing();
+        }
+
+    }
+);
+
+
 /* =========================
    Escキーで閉じる
 ========================= */
@@ -675,6 +755,8 @@ document.addEventListener("keydown", function(event) {
         closeCleaner();
 
         closeRoast();
+
+        closeWinnowing();
 
     }
 
