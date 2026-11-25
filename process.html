@@ -56,7 +56,8 @@ body {
 .receiving-link,
 .cleaner-link,
 .roast-link,
-.winnowing-link {
+.winnowing-link,
+.grinding-link {
     position: absolute;
     display: block;
     z-index: 2;
@@ -73,14 +74,16 @@ body {
 .receiving-link:hover,
 .cleaner-link:hover,
 .roast-link:hover,
-.winnowing-link:hover {
+.winnowing-link:hover,
+.grinding-link:hover {
     background: rgba(255, 211, 105, 0.10);
 }
 
 .receiving-link:focus-visible,
 .cleaner-link:focus-visible,
 .roast-link:focus-visible,
-.winnowing-link:focus-visible {
+.winnowing-link:focus-visible,
+.grinding-link:focus-visible {
     outline: 3px solid #ffda83;
     outline-offset: 3px;
 }
@@ -128,6 +131,18 @@ body {
     width: 18.5%;
     height: 19%;
 }
+
+/* =========================
+   5 磨砕
+========================= */
+
+.grinding-link {
+    left: 81.2%;
+    top: 26%;
+    width: 16.5%;
+    height: 19%;
+}
+
 
 /* =========================
    ポップアップ背景
@@ -274,6 +289,15 @@ body {
         height: 12.5%;
     }
 
+    /* 5 磨砕 */
+
+    .grinding-link {
+        left: 34%;
+        top: 28.8%;
+        width: 30.5%;
+        height: 12.5%;
+    }
+
     /* ポップアップ */
 
     .modal {
@@ -378,6 +402,16 @@ body.modal-open {
         class="winnowing-link"
         aria-label="4 分離の解説を開く"
         onclick="openWinnowing()">
+    </button>
+
+
+    <!-- 5 磨砕 -->
+
+    <button
+        type="button"
+        class="grinding-link"
+        aria-label="5 磨砕の解説を開く"
+        onclick="openGrinding()">
     </button>
 
 </div>
@@ -565,6 +599,47 @@ body.modal-open {
 
 
 <!-- =========================
+     5 磨砕 ポップアップ
+========================= -->
+
+<div
+    id="grindingModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="カカオニブの磨砕">
+
+    <div class="modal-content">
+
+        <button
+            type="button"
+            class="close-button"
+            aria-label="閉じる"
+            onclick="closeGrinding()">
+            ×
+        </button>
+
+        <picture>
+
+            <!-- スマートフォン用 -->
+            <source
+                media="(max-width: 767px)"
+                srcset="5sgrinding.png">
+
+            <!-- PC用 -->
+            <img
+                src="5grinding.png"
+                alt="5 磨砕（グラインディング）の工程解説"
+                class="modal-image">
+
+        </picture>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
      JavaScript
 ========================= -->
 
@@ -691,6 +766,36 @@ function closeWinnowing() {
 
 
 /* =========================
+   5 磨砕を開く
+========================= */
+
+function openGrinding() {
+
+    const modal = document.getElementById("grindingModal");
+
+    modal.classList.add("active");
+
+    document.body.classList.add("modal-open");
+
+}
+
+
+/* =========================
+   5 磨砕を閉じる
+========================= */
+
+function closeGrinding() {
+
+    const modal = document.getElementById("grindingModal");
+
+    modal.classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+
+}
+
+
+/* =========================
    背景クリックで閉じる
 ========================= */
 
@@ -742,6 +847,18 @@ document.getElementById("winnowingModal").addEventListener(
 );
 
 
+document.getElementById("grindingModal").addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === this) {
+            closeGrinding();
+        }
+
+    }
+);
+
+
 /* =========================
    Escキーで閉じる
 ========================= */
@@ -758,6 +875,8 @@ document.addEventListener("keydown", function(event) {
 
         closeWinnowing();
 
+        closeGrinding();
+
     }
 
 });
@@ -767,3 +886,4 @@ document.addEventListener("keydown", function(event) {
 
 </body>
 </html>
+
